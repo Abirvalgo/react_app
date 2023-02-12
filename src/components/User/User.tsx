@@ -7,16 +7,13 @@ type UserProps = {
 };
 
 const User: FC<UserProps> = ({ username }) => {
-	function shortName(str: string) {
-		const firstLetters = str
-			.split(" ")
-			.map((word: any) => word.charAt(0))
-			.join("");
-		return firstLetters;
-	}
+	const shortname = username
+		.split(" ")
+		.map((word) => word.charAt(0))
+		.join("");
 	return (
 		<div className={styles.userframe}>
-			<p>{shortName(username)}</p>
+			<p>{shortname}</p>
 			<p>{username}</p>
 		</div>
 	);
