@@ -11,3 +11,10 @@
 		cursor: pointer;
 	}
 }
+
+@mixin h1 {
+	font-style: normal;
+	font-weight: 700;
+	font-size: 56px;
+	line-height: 80px;
+}
