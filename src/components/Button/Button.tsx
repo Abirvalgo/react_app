@@ -13,6 +13,7 @@ type ButtonProps = {
 	onClick: () => void;
 	type: ButtonType;
 	disabled?: boolean;
+	className?: string;
 };
 
 const btnStyles = {
