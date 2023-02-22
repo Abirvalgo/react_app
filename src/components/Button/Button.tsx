@@ -13,6 +13,7 @@ type ButtonProps = {
 	onClick: () => void;
 	type: ButtonType;
 	disabled?: boolean;
+	className?: string;
 };
 
 const btnStyles = {
@@ -20,12 +21,18 @@ const btnStyles = {
 	[ButtonType.Secondary]: styles.secondaryButton,
 	[ButtonType.Error]: styles.errorButton,
 };
-const Button: FC<ButtonProps> = ({ title, onClick, type, disabled }) => {
+const Button: FC<ButtonProps> = ({
+	title,
+	onClick,
+	type,
+	disabled,
+	className,
+}) => {
 	const buttonClassName = btnStyles[type];
 	return (
 		<div
 			onClick={disabled ? undefined : onClick}
-			className={classNames(buttonClassName, {
+			className={classNames(buttonClassName, className, {
 				[styles.disabledButton]: disabled,
 			})}
 		>
