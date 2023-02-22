@@ -10,17 +10,15 @@ enum ButtonState {
 }
 
 const MenuButton = () => {
-	const [btnState, setBtnState] = useState(ButtonState.Opened);
+	const [btnState, setBtnState] = useState(false);
 
 	const changeState = () => {
-		return btnState === ButtonState.Opened
-			? setBtnState(ButtonState.Closed)
-			: setBtnState(ButtonState.Opened);
+		return setBtnState(!btnState);
 	};
 	return (
 		<Button
 			className={styles.menu}
-			title={btnState === ButtonState.Opened ? <OpenMenu /> : <CloseMenu />}
+			title={btnState ? <CloseMenu /> : <OpenMenu />}
 			type={ButtonType.Primary}
 			onClick={changeState}
 		/>
