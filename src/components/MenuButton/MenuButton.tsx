@@ -4,11 +4,6 @@ import Button, { ButtonType } from "../Button";
 import styles from "./MenuButton.module.scss";
 import { CloseMenu, OpenMenu } from "../../assets/icons";
 
-enum ButtonState {
-	Opened,
-	Closed,
-}
-
 const MenuButton = () => {
 	const [btnState, setBtnState] = useState(false);
 
