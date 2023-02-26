@@ -1,4 +1,4 @@
-export type CardType = {
+export type PostType = {
 	id: number;
 	image: string;
 	text: string;
@@ -8,14 +8,6 @@ export type CardType = {
 	description: string;
 	author: number;
 };
-
-export enum CardSize {
-	Large,
-	Medium,
-	Small,
-}
-
-export type CardProps = {
-	card: CardType;
-	size: CardSize;
+export type PostProps = {
+	post: PostType;
 };
