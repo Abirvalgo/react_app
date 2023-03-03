@@ -8,6 +8,8 @@ import styles from "./Home.module.scss";
 import classNames from "classnames";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
+import Success from "../Success";
+import SignIn from "../SignIn";
 
 const MOCK_ARRAY = [
 	{
@@ -175,6 +177,8 @@ const Home = () => {
 			<Tabs />
 			<CardsList cardsList={cardsList} />
 			<ThemeSwitcher />
+			<Success />
+			<SignIn />
 		</div>
 	);
 };
