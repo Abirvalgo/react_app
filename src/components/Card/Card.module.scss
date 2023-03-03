@@ -9,6 +9,7 @@
 	border-bottom: 1px solid $medium;
 	max-width: 736px;
 	height: 450px;
+	box-sizing: border-box;
 }
 
 .footer {
@@ -86,4 +87,15 @@
 }
 .smallInfoContainer {
 	gap: 34px;
+}
+.darkTitle {
+	color: $white;
+}
+.darkIconContainer {
+	div > svg > path {
+		fill: $white;
+	}
+}
+.darkContainer {
+	border-bottom-color: $gray;
 }
