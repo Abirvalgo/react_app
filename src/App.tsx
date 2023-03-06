@@ -1,29 +1,20 @@
-import React from "react";
-import "./App.css";
-import Button from "./components/Button";
-import User from "./components/User";
-import classNames from "classnames";
-import { ButtonType } from "./components/Button/Button";
-import Title from "./components/Title";
-import Tabs from "./components/Tabs";
-import MenuButton from "./components/MenuButton";
+import React, { useState } from "react";
+import "./App.module.scss";
+import Home from "./pages/Home";
+import ThemeProvider from "./context/Theme/Provider";
+import { Theme } from "./context/Theme/Context";
 
 const App = () => {
+	const [theme, setTheme] = useState(Theme.Dark);
+
+	const onChangeTheme = (value: Theme) => {
+		setTheme(value);
+	};
+
 	return (
-		<div>
-			<Button title={`Primary`} type={ButtonType.Primary} onClick={() => {}} />
-			<Button
-				disabled
-				title={`Secondary`}
-				type={ButtonType.Secondary}
-				onClick={() => {}}
-			/>
-			<Button title={`Error`} type={ButtonType.Error} onClick={() => {}} />
-			<User username={"Artem Malkin"} />
-			<Title text={"Blog"} />
-			<Tabs />
-			<MenuButton />
-		</div>
+		<ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
+			<Home />
+		</ThemeProvider>
 	);
 };
 

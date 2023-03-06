@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useState } from "react";
 import classNames from "classnames";
 import styles from "./Tabs.module.scss";
+import { Theme, useThemeContext } from "../../context/Theme/Context";
 
 enum TabsNames {
 	ALL,
@@ -30,8 +31,14 @@ const Tabs = () => {
 	const [activeTab, setActiveTab] = useState(TabsNames.ALL);
 	const onTabClick = (key: TabsNames) => () => setActiveTab(key);
 
+	const { theme } = useThemeContext();
+
 	return (
-		<div className={styles.container}>
+		<div
+			className={classNames(styles.container, {
+				[styles.darkContainer]: theme === Theme.Dark,
+			})}
+		>
 			{TABS_LIST.map((tab) => {
 				return (
 					<div
