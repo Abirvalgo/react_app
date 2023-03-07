@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import styles from "./Confirmation.module.scss";
+import styles from "./Confirm.module.scss";
 import Title from "../../components/Title";
 import classNames from "classnames";
 import Button from "../../components/Button";
