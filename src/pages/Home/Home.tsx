@@ -10,6 +10,7 @@ import { Theme, useThemeContext } from "../../context/Theme/Context";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
 import Success from "../Success";
 import SignIn from "../SignIn";
+import Confirmation from "../Confirm";
 
 const MOCK_ARRAY = [
 	{
@@ -177,8 +178,6 @@ const Home = () => {
 			<Tabs />
 			<CardsList cardsList={cardsList} />
 			<ThemeSwitcher />
-			<Success />
-			<SignIn />
 		</div>
 	);
 };
