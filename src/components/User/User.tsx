@@ -6,7 +6,7 @@ type UserProps = {
 	username: string;
 };
 
-const User: FC<UserProps> = ({ username }) => {
+const UserName: FC<UserProps> = ({ username }) => {
 	const shortname = username
 		.split(" ")
 		.map((word) => word.charAt(0))
@@ -19,4 +19,4 @@ const User: FC<UserProps> = ({ username }) => {
 	);
 };
 
-export default User;
+export default UserName;

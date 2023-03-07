@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import styles from "./SignIn.module.scss";
+import styles from "./SignUp.module.scss";
 import Title from "../../components/Title";
 import Input from "../../components/Input";
 import classNames from "classnames";
@@ -9,25 +9,29 @@ import { ButtonType } from "../../components/Button/Button";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import { RoutesList } from "../Router";
 
-const SignIn = () => {
+const SignUp = () => {
+	const [userName, setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
+	const onChangeUserName = (value: string) => {
+		setUserName(value);
+	};
 	const onChangeEmail = (value: string) => {
 		setEmail(value);
 	};
 	const onChangePassword = (value: string) => {
 		setPassword(value);
 	};
-	const onSignInClick = () => {
-		navigate(RoutesList.Success);
+	const onSignUpClick = () => {
+		navigate(RoutesList.Confirm);
 	};
 	const onHomeClick = () => {
 		navigate(RoutesList.Home);
 	};
 	const onSignInNavClick = () => {
-		navigate(RoutesList.SignUp);
+		navigate(RoutesList.SignIn);
 	};
 
 	const { theme } = useThemeContext();
@@ -48,7 +52,7 @@ const SignIn = () => {
 				Back to home
 			</div>
 			<div className={classNames(styles.title)}>
-				<Title title={"Sign In"} />
+				<Title title={"Sign Up"} />
 			</div>
 			<div className={styles.wrapper}>
 				<div
@@ -57,6 +61,13 @@ const SignIn = () => {
 					})}
 				>
 					<div className={styles.input}>
+						<Input
+							value={userName}
+							onChange={onChangeUserName}
+							type={"text"}
+							title="Name"
+							placeholder="Your name"
+						/>
 						<Input
 							value={email}
 							onChange={onChangeEmail}
@@ -71,19 +82,19 @@ const SignIn = () => {
 							title="Password"
 							placeholder="Your password"
 						/>
-					</div>
-					<div
-						className={classNames(styles.forgotPassword, {
-							[styles.forgotPasswordDark]: isDark,
-						})}
-					>
-						Forgot password?
+						<Input
+							value={password}
+							onChange={onChangePassword}
+							type={"password"}
+							title="Confirm password"
+							placeholder="Confirm password"
+						/>
 					</div>
 					<div className={styles.button}>
 						<Button
-							title={"Sign In"}
+							title={"Sign Up"}
 							type={ButtonType.Primary}
-							onClick={onSignInClick}
+							onClick={onSignUpClick}
 						/>
 					</div>
 					<div
@@ -91,8 +102,8 @@ const SignIn = () => {
 							[styles.signUpDark]: isDark,
 						})}
 					>
-						Don’t have an account?{" "}
-						<div className={styles.signInbtn} onClick={onSignInNavClick}>
+						Already have an account?
+						<div className={styles.signUpbtn} onClick={onSignInNavClick}>
 							Sign Up
 						</div>
 					</div>
@@ -102,4 +113,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default SignUp;
