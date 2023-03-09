@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import Title from "../../components/Title";
 import Tabs from "../../components/Tabs";
@@ -8,9 +8,6 @@ import styles from "./Home.module.scss";
 import classNames from "classnames";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
-import Success from "../Success";
-import SignIn from "../SignIn";
-import Confirmation from "../Confirm";
 
 const MOCK_ARRAY = [
 	{

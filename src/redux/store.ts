@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import themeReducer from "./reducers/themeSlice";
+import modalReducer from "./reducers/postSlice";
 
 const store = configureStore({
 	reducer: {
 		theme: themeReducer,
+		modal: modalReducer,
 	},
 });
 

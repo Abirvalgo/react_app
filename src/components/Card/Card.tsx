@@ -10,11 +10,14 @@ import {
 	MoreIcon,
 } from "../../assets/icons";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
+import { Modal, useModalContext } from "../../context/Modal/Context";
+import ModalSwitcher from "../ModalSwitcher";
 
 const Card: FC<CardProps> = ({ card, size }) => {
 	const { title, text, date, image } = card;
 
 	const { theme } = useThemeContext();
+	const { modalState } = useModalContext();
 
 	const isMedium = size === CardSize.Medium;
 	const isSmall = size === CardSize.Small;
@@ -77,12 +80,11 @@ const Card: FC<CardProps> = ({ card, size }) => {
 					<div>
 						<BookmarkIcon />
 					</div>
-					<div>
-						<MoreIcon />
+						{/* <MoreIcon /> */}
+						<ModalSwitcher/>
 					</div>
 				</div>
 			</div>
-		</div>
 	);
 };
 
