@@ -8,6 +8,7 @@ import styles from "./Home.module.scss";
 import classNames from "classnames";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
+import SelectedPostModal from "./SelectedPostModal";
 
 const MOCK_ARRAY = [
 	{
@@ -175,6 +176,7 @@ const Home = () => {
 			<Tabs />
 			<CardsList cardsList={cardsList} />
 			<ThemeSwitcher />
+			<SelectedPostModal/>
 		</div>
 	);
 };

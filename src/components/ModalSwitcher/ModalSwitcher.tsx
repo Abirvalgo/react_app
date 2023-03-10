@@ -1,20 +1,30 @@
-import React from "react";
-
-import { MoreIcon } from "../../assets/icons";
+import React, { FC, ReactNode } from "react";
+import { useDispatch } from "react-redux";
+import { CloseMenu } from "../../assets/icons";
+import { changeModal, visibleModal } from "../../redux/reducers/postSlice";
 import styles from "./ModalSwitcher.module.scss";
-import { Modal, useModalContext } from "../../context/Modal/Context";
-import classNames from "classnames";
 
-const ModalSwitcher = () => {
-	const { modalState, onChangeModal } = useModalContext();
+type ModalSwitcherProps = {
+	isVisible: boolean;
+	onClose: () => void;
+	children: ReactNode;
+};
 
-	const onClick = (value: Modal) => () => onChangeModal(value);
-
-	return (
-		<div className={styles.button} onClick={onClick(Modal.Opened)}>
-			<MoreIcon />
+const ModalSwitcher: FC<ModalSwitcherProps> = ({
+	isVisible,
+	onClose,
+	children,
+}) => {
+	return isVisible ? (
+		<div className={styles.container}>
+			<div className={styles.content}>
+				<div className={styles.closeIcon} onClick={onClose}>
+					<CloseMenu fill="#000000" />
+				</div>
+				<div className={styles.infoContainer}>{children}</div>
+			</div>
 		</div>
-	);
+	) : null;
 };
 
 export default ModalSwitcher;
