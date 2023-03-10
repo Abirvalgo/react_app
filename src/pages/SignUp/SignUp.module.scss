@@ -64,7 +64,7 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 24px;
-	.signInbtn {
+	.signUpbtn {
 		color: $primary;
 		margin-left: 4px;
 		&:hover {
@@ -74,7 +74,7 @@
 }
 .signUpDark {
 	color: $medium;
-	.signInbtn {
+	.signUpbtn {
 		color: $primary-secondary;
 	}
 }
