@@ -2,35 +2,75 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CardType } from "../../components/Card";
 import { RootState } from "../store";
 //
-type PostState = {
+export enum LikeStatus {
+	Like = "like",
+	Dislike = "dislike",
+}
+
+type initialStateType = {
 	selectedPost: CardType | null;
 	isVisibleSelectedModal: boolean;
+	likedPosts: CardType[];
+	dislikedPosts: CardType[];
 };
 //
-const initialState: PostState = {
+const initialState: initialStateType = {
 	selectedPost: null,
 	isVisibleSelectedModal: false,
+	likedPosts: [],
+	dislikedPosts: [],
 };
 
-const modalSlice = createSlice({
-	name: "modal",
+const postSlice = createSlice({
+	name: "post",
 	initialState,
 	reducers: {
-		changeModal: (state, action: PayloadAction<CardType | null>) => {
+		setSelectedPost: (state, action: PayloadAction<CardType | null>) => {
 			state.selectedPost = action.payload;
 		},
-		visibleModal: (state, action: PayloadAction<boolean>) => {
+		setPostVisibility: (state, action: PayloadAction<boolean>) => {
 			state.isVisibleSelectedModal = action.payload;
+		},
+		setStatus: (
+			state,
+			action: PayloadAction<{ status: LikeStatus; card: CardType }>
+		) => {
+			const { status, card } = action.payload;
+			const likedIndex = state.likedPosts.findIndex(
+				(post) => post.id === card.id
+			);
+			const dislikedIndex = state.dislikedPosts.findIndex(
+				(post) => post.id === card.id
+			);
+
+			const isLike = status === LikeStatus.Like;
+
+			const mainKey = isLike ? "likedPosts" : "dislikedPosts";
+			const secondaryKey = isLike ? "dislikedPosts" : "likedPosts";
+			const mainIndex = isLike ? likedIndex : dislikedIndex;
+			const secondaryIndex = isLike ? dislikedIndex : likedIndex;
+
+			if (mainIndex === -1) {
+				state[mainKey].push(card);
+			} else {
+				state[mainKey].splice(mainIndex, 1);
+			}
+			if (secondaryIndex > -1) {
+				state[secondaryKey].splice(secondaryIndex, 1);
+			}
 		},
 	},
 });
 
-export const { changeModal, visibleModal } = modalSlice.actions;
-export default modalSlice.reducer;
+export const { setSelectedPost, setPostVisibility, setStatus } =
+	postSlice.actions;
+export default postSlice.reducer;
 
-export const ModalSelectors = {
-	getModalValue: (state: RootState) => state.modal.selectedPost,
-	getModalVisible: (state: RootState) => state.modal.isVisibleSelectedModal,
+export const PostSelectors = {
+	getSelectedPost: (state: RootState) => state.post.selectedPost,
+	getPostVisibility: (state: RootState) => state.post.isVisibleSelectedModal,
+	getLikedPosts: (state: RootState) => state.post.likedPosts,
+	getDislikedPosts: (state: RootState) => state.post.dislikedPosts,
 };
 
 // const changeThemeAction = (payload) => {

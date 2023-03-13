@@ -11,9 +11,11 @@ import {
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	changeModal,
-	ModalSelectors,
-	visibleModal,
+	setSelectedPost,
+	PostSelectors,
+	setPostVisibility,
+	LikeStatus,
+	setStatus,
 } from "../../redux/reducers/postSlice";
 
 const Card: FC<CardProps> = ({ card, size }) => {
@@ -21,15 +23,25 @@ const Card: FC<CardProps> = ({ card, size }) => {
 	const dispatch = useDispatch();
 	const { theme } = useThemeContext();
 
-	const isVisible = useSelector(ModalSelectors.getModalVisible);
+	const isVisible = useSelector(PostSelectors.getPostVisibility);
 	const isMedium = size === CardSize.Medium;
 	const isSmall = size === CardSize.Small;
 	const isDark = theme === Theme.Dark;
 
 	const onClickMore = () => {
-		dispatch(changeModal(card));
-		dispatch(visibleModal(true));
+		dispatch(setSelectedPost(card));
+		dispatch(setPostVisibility(true));
 	};
+
+	const onStatusClick = (status: LikeStatus) => () => {
+		dispatch(setStatus({ status, card }));
+	};
+	const likedPosts = useSelector(PostSelectors.getLikedPosts);
+	const dislikedPosts = useSelector(PostSelectors.getDislikedPosts);
+
+	const likedIndex = likedPosts.findIndex((post) => post.id === card.id);
+	const dislikedIndex = dislikedPosts.findIndex((post) => post.id === card.id);
+
 	return (
 		<div
 			className={classNames(styles.container, {
@@ -72,11 +84,19 @@ const Card: FC<CardProps> = ({ card, size }) => {
 						[styles.darkIconContainer]: isDark,
 					})}
 				>
-					<div>
+					<div
+						onClick={onStatusClick(LikeStatus.Like)}
+						className={styles.iconWrapper}
+					>
 						<LikeIcon />
+						<div>{likedIndex > -1 && 1}</div>
 					</div>
-					<div>
+					<div
+						onClick={onStatusClick(LikeStatus.Dislike)}
+						className={styles.iconWrapper}
+					>
 						<DislikeIcon />
+						<div>{dislikedIndex > -1 && 1}</div>
 					</div>
 				</div>
 				<div

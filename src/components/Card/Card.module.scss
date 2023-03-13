@@ -98,3 +98,12 @@
 .darkContainer {
 	border-bottom-color: $gray;
 }
+
+.iconWrapper {
+	display: flex;
+	gap: 8px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	color: $secondary;
+}

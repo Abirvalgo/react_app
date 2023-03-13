@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import { CloseMenu } from "../../assets/icons";
-import { changeModal, visibleModal } from "../../redux/reducers/postSlice";
+import { setSelectedPost, setPostVisibility } from "../../redux/reducers/postSlice";
 import styles from "./ModalSwitcher.module.scss";
 
 type ModalSwitcherProps = {
