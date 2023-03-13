@@ -12,6 +12,7 @@ type initialStateType = {
 	isVisibleSelectedModal: boolean;
 	likedPosts: CardType[];
 	dislikedPosts: CardType[];
+	savedPosts: CardType[];
 };
 //
 const initialState: initialStateType = {
@@ -19,6 +20,7 @@ const initialState: initialStateType = {
 	isVisibleSelectedModal: false,
 	likedPosts: [],
 	dislikedPosts: [],
+	savedPosts: [],
 };
 
 const postSlice = createSlice({
@@ -59,10 +61,21 @@ const postSlice = createSlice({
 				state[secondaryKey].splice(secondaryIndex, 1);
 			}
 		},
+		setSavedPosts: (state, action: PayloadAction<{ card: CardType }>) => {
+			const { card } = action.payload;
+			const savedPostsIndex = state.savedPosts.findIndex(
+				(post) => post.id === card.id
+			);
+			if (savedPostsIndex === -1) {
+				state.savedPosts.push(card);
+			} else {
+				state.savedPosts.splice(savedPostsIndex, 1);
+			}
+		},
 	},
 });
 
-export const { setSelectedPost, setPostVisibility, setStatus } =
+export const { setSelectedPost, setPostVisibility, setStatus, setSavedPosts } =
 	postSlice.actions;
 export default postSlice.reducer;
 
@@ -71,6 +84,7 @@ export const PostSelectors = {
 	getPostVisibility: (state: RootState) => state.post.isVisibleSelectedModal,
 	getLikedPosts: (state: RootState) => state.post.likedPosts,
 	getDislikedPosts: (state: RootState) => state.post.dislikedPosts,
+	getSavedPosts: (state: RootState) => state.post.savedPosts,
 };
 
 // const changeThemeAction = (payload) => {

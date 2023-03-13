@@ -7,6 +7,7 @@ import {
 	DislikeIcon,
 	LikeIcon,
 	MoreIcon,
+	BookmarkIconSaved,
 } from "../../assets/icons";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,7 @@ import {
 	setPostVisibility,
 	LikeStatus,
 	setStatus,
+	setSavedPosts,
 } from "../../redux/reducers/postSlice";
 
 const Card: FC<CardProps> = ({ card, size }) => {
@@ -36,11 +38,17 @@ const Card: FC<CardProps> = ({ card, size }) => {
 	const onStatusClick = (status: LikeStatus) => () => {
 		dispatch(setStatus({ status, card }));
 	};
+
+	const onClickBookmark = () => {
+		dispatch(setSavedPosts({ card }));
+	};
 	const likedPosts = useSelector(PostSelectors.getLikedPosts);
 	const dislikedPosts = useSelector(PostSelectors.getDislikedPosts);
-
 	const likedIndex = likedPosts.findIndex((post) => post.id === card.id);
 	const dislikedIndex = dislikedPosts.findIndex((post) => post.id === card.id);
+
+	const savedPosts = useSelector(PostSelectors.getSavedPosts);
+	const savedPostsIndex = savedPosts.findIndex((post) => post.id === card.id);
 
 	return (
 		<div
@@ -104,8 +112,8 @@ const Card: FC<CardProps> = ({ card, size }) => {
 						[styles.darkIconContainer]: isDark,
 					})}
 				>
-					<div>
-						<BookmarkIcon />
+					<div onClick={onClickBookmark}>
+						{savedPostsIndex > -1 ? <BookmarkIconSaved /> : <BookmarkIcon />}
 					</div>
 					{!isVisible && (
 						<div onClick={onClickMore}>
