@@ -62,16 +62,11 @@ const Card: FC<CardProps> = ({ card, size }) => {
 	return (
 		<div
 			className={classNames(styles.container, {
-				[styles.mediumContainer]: isMedium,
-				[styles.smallContainer]: isSmall,
 				[styles.darkContainer]: isDark,
 			})}
 		>
 			<div
-				className={classNames(styles.infoContainer, {
-					[styles.mediumInfoContainer]: isMedium,
-					[styles.smallInfoContainer]: isSmall,
-				})}
+				className={classNames(styles.infoContainer)}
 			>
 				<div className={styles.mainInfoContainer}>
 					<div className={styles.titleContainer}>
@@ -86,14 +81,11 @@ const Card: FC<CardProps> = ({ card, size }) => {
 							{title}
 						</div>
 					</div>
-					{size === CardSize.Large && <div className={styles.text}>{text}</div>}
+					<div className={styles.text}>{text}</div>
 				</div>
 				<img
 					src={image}
-					className={classNames(styles.image, {
-						[styles.mediumImage]: isMedium,
-						[styles.smallImage]: isSmall,
-					})}
+					className={classNames(styles.image)}
 				/>
 			</div>
 			<div className={styles.footer}>

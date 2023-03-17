@@ -1,9 +1,16 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
 
-import { getAllPosts, setAllPosts } from "../reducers/postSlice";
+import {
+	getAllPosts,
+	getSinglePost,
+	setAllPosts,
+	setSinglePost,
+} from "../reducers/postSlice";
 import API from "../api";
 import { AllPostsResponse } from "./@types";
+import { CardType } from "../../utils/@globalTypes";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 function* getAllPostsWorker() {
 	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
@@ -16,6 +23,21 @@ function* getAllPostsWorker() {
 	}
 }
 
+function* getSinglePostWorker(action: PayloadAction<string>) {
+	const { ok, data, problem }: ApiResponse<CardType> = yield call(
+		API.getSinglePost,
+		action.payload
+	);
+	if (ok && data) {
+		yield put(setSinglePost(data));
+	} else {
+		console.warn("Error getting post", problem);
+	}
+}
+
 export default function* postsSaga() {
-	yield all([takeLatest(getAllPosts, getAllPostsWorker)]);
+	yield all([
+		takeLatest(getAllPosts, getAllPostsWorker),
+		takeLatest(getSinglePost, getSinglePostWorker),
+	]);
 }

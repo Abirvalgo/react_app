@@ -14,6 +14,7 @@ type initialStateType = {
 	dislikedPosts: CardListType;
 	savedPosts: CardListType;
 	postsList: CardListType;
+	singlePost: CardType | undefined
 };
 //
 const initialState: initialStateType = {
@@ -23,12 +24,17 @@ const initialState: initialStateType = {
 	dislikedPosts: [],
 	savedPosts: [],
 	postsList: [],
+	singlePost: undefined,
 };
 
 const postSlice = createSlice({
 	name: "post",
 	initialState,
 	reducers: {
+		getSinglePost: (_, __: PayloadAction<string>) => {},
+		setSinglePost:(state, action: PayloadAction<CardType>) => {
+			state.singlePost = action.payload;
+		},
 		getAllPosts: (_, __: PayloadAction<undefined>) => {},
 		setAllPosts: (state, action: PayloadAction<CardListType>) => {
 			state.postsList = action.payload;
@@ -88,6 +94,8 @@ export const {
 	setSavedPosts,
 	getAllPosts,
 	setAllPosts,
+	getSinglePost,
+	setSinglePost
 } = postSlice.actions;
 export default postSlice.reducer;
 
@@ -98,6 +106,7 @@ export const PostSelectors = {
 	getDislikedPosts: (state: RootState) => state.post.dislikedPosts,
 	getSavedPosts: (state: RootState) => state.post.savedPosts,
 	getAllPosts: (state: RootState) => state.post.postsList,
+	getSinglePost:(state:RootState) => state.post.singlePost
 };
 
 // const changeThemeAction = (payload) => {

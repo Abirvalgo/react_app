@@ -13,10 +13,6 @@ import { getAllPosts, PostSelectors } from "../../redux/reducers/postSlice";
 const Home = () => {
 	const dispatch = useDispatch();
 
-	//TODO remove on next lesson
-	const params = useParams();
-	console.log("Id from url", params?.id);
-
 	const postsList = useSelector(PostSelectors.getAllPosts);
 
 	const { theme } = useThemeContext();

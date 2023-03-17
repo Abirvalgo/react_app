@@ -7,6 +7,7 @@ import Home from "./Home";
 import Success from "./Success";
 import SignUp from "./SignUp";
 import Confirm from "./Confirm";
+import SelectedPost from "./Post/SelectedPost";
 
 
 export enum RoutesList {
@@ -28,7 +29,7 @@ const Router = () => {
 			<Routes>
 				<Route path={RoutesList.Home} element={<PagesContainer />}>
 					<Route path={RoutesList.Home} element={<Home />} />
-					<Route path={RoutesList.SinglePost} element={<Home />} />
+					<Route path={RoutesList.SinglePost} element={<SelectedPost />} />
 					<Route path={RoutesList.SignIn} element={<SignIn />} />
 					<Route path={RoutesList.Success} element={<Success />} />
 					<Route path={RoutesList.SignUp} element={<SignUp />} />
