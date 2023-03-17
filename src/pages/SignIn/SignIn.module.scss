@@ -12,6 +12,7 @@
 	line-height: 24px;
 	color: $secondary;
 	margin-bottom: 32px;
+	text-decoration: none;
 	&:hover {
 		cursor: pointer;
 	}
@@ -40,6 +41,7 @@
 .title {
 	text-align: start;
 	margin-bottom: 72px;
+	text-decoration: none;
 }
 .forgotPassword {
 	font-size: 16px;
@@ -67,6 +69,7 @@
 	.signInbtn {
 		color: $primary;
 		margin-left: 4px;
+		text-decoration: none;
 		&:hover {
 			cursor: pointer;
 		}

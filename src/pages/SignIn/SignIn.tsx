@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.scss";
 import Title from "../../components/Title";
 import Input from "../../components/Input";
 import classNames from "classnames";
 import Button from "../../components/Button";
-import { ButtonType } from "../../components/Button/Button";
+import { ButtonType } from "../../utils/@globalTypes";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import { RoutesList } from "../Router";
 
@@ -23,12 +23,6 @@ const SignIn = () => {
 	const onSignInClick = () => {
 		navigate(RoutesList.Success);
 	};
-	const onHomeClick = () => {
-		navigate(RoutesList.Home);
-	};
-	const onSignInNavClick = () => {
-		navigate(RoutesList.SignUp);
-	};
 
 	const { theme } = useThemeContext();
 	const isDark = theme === Theme.Dark;
@@ -39,14 +33,14 @@ const SignIn = () => {
 				[styles.containerDark]: isDark,
 			})}
 		>
-			<div
+			<NavLink
+				to={RoutesList.Home}
 				className={classNames(styles.backHome, {
 					[styles.backHomeDark]: isDark,
 				})}
-				onClick={onHomeClick}
 			>
 				Back to home
-			</div>
+			</NavLink>
 			<div className={classNames(styles.title)}>
 				<Title title={"Sign In"} />
 			</div>
@@ -92,9 +86,9 @@ const SignIn = () => {
 						})}
 					>
 						Don’t have an account?{" "}
-						<div className={styles.signInbtn} onClick={onSignInNavClick}>
+						<NavLink to={RoutesList.SignUp} className={styles.signInbtn}>
 							Sign Up
-						</div>
+						</NavLink>
 					</div>
 				</div>
 			</div>

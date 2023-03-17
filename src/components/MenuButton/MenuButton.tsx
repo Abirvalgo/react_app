@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useState } from "react";
 import classNames from "classnames";
-import Button, { ButtonType } from "../Button";
+import Button from "../Button";
+import { ButtonType } from "../../utils/@globalTypes";
 import styles from "./MenuButton.module.scss";
 import { CloseMenu, OpenMenu } from "../../assets/icons";
 
