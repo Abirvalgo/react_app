@@ -97,12 +97,6 @@ const Post: FC<SinglePostProps> = ({ singlePost }) => {
 
 export default Post;
 
-function dispatch(arg0: {
-	payload: CardType | null;
-	type: "post/setSelectedPost";
-}) {
-	throw new Error("Function not implemented.");
-}
 // import React, { FC } from "react";
 // import styles from "./Post.module.scss";
 // import { BookmarkIcon, DislikeIcon, LikeIcon } from "../../assets/icons";
