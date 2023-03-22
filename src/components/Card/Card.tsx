@@ -134,6 +134,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
 			</div>
 		</div>
 	);
+	
 };
 
 export default Card;
