@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./Confirm.module.scss";
 import Title from "../../components/Title";
 import classNames from "classnames";
@@ -7,13 +7,24 @@ import Button from "../../components/Button";
 import { ButtonType } from "../../utils/@globalTypes";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import { RoutesList } from "../Router";
+import { useDispatch } from "react-redux";
+import { activateUser } from "../../redux/reducers/authSlice";
 
 const Confirm = () => {
 	const { theme } = useThemeContext();
 	const isDark = theme === Theme.Dark;
 	const navigate = useNavigate();
-	const onHomeClick = () => {
-		navigate(RoutesList.Home);
+	const dispatch = useDispatch();
+	const { uid, token } = useParams();
+	const onConfirmButtonClick = () => {
+		if (uid && token) {
+			dispatch(
+				activateUser({
+					data: { uid, token },
+					callback: () => navigate(RoutesList.Success),
+				})
+			);
+		}
 	};
 	return (
 		<div
@@ -21,7 +32,8 @@ const Confirm = () => {
 				[styles.containerDark]: isDark,
 			})}
 		>
-			<NavLink to={RoutesList.Home}
+			<NavLink
+				to={RoutesList.Home}
 				className={classNames(styles.backHome, {
 					[styles.backHomeDark]: isDark,
 				})}
@@ -38,14 +50,13 @@ const Confirm = () => {
 					})}
 				>
 					<div className={styles.formText}>
-						Please activate your account with the activation link in the email
-						example@gmail.com.
+						Please activate your account with the activation link in the email.
+						Please, check your email
 					</div>
-					<div>Please, check your email</div>
 					<div className={styles.button}>
 						<Button
-							title={"Go to home"}
-							onClick={onHomeClick}
+							title={"Confirm"}
+							onClick={onConfirmButtonClick}
 							type={ButtonType.Primary}
 						/>
 					</div>

@@ -9,7 +9,6 @@ import SignUp from "./SignUp";
 import Confirm from "./Confirm";
 import Post from "./Post";
 
-
 export enum RoutesList {
 	Home = "/",
 	SinglePost = "/blog/:id",
@@ -17,7 +16,7 @@ export enum RoutesList {
 	AddPost = "/blog/add",
 	SignIn = "/sign-in",
 	SignUp = "/sign-up",
-	Confirm = "/sign-up/confirm",
+	Confirm = "/activate/:uid/:token",
 	Success = "/sign-up/success",
 	Default = "*",
 }
