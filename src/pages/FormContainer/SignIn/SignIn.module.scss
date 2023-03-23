@@ -49,6 +49,10 @@
 	color: $secondary;
 	font-weight: 400;
 	margin-top: 16px;
+	&:hover {
+		color: $primary;
+		cursor: pointer;
+	}
 }
 .forgotPasswordDark {
 	color: $white;

@@ -8,17 +8,23 @@ import Success from "./FormContainer/Success";
 import SignUp from "./FormContainer/SignUp";
 import Confirm from "./FormContainer/Confirm";
 import Post from "./Post";
+import FormContainer from "./FormContainer";
+import ResetPassword from "./FormContainer/ResetPassword";
+import NewPassword from "./FormContainer/NewPassword";
 
 export enum RoutesList {
 	Home = "/",
 	SinglePost = "/blog/:id",
 	Search = "/blog/search",
 	AddPost = "/blog/add",
-	SignIn = "/sign-in",
-	SignUp = "/sign-up",
-	Confirm = "/activate/:uid/:token",
-	Success = "/sign-up/success",
+	SignIn = "/account/sign-in",
+	SignUp = "/account/sign-up",
+	Confirm = "/account/activate/:uid/:token",
+	Success = "/account/sign-up/success",
 	Default = "*",
+	AccountLogin = "/account",
+	ResetPassword = "/account/reset-password",
+	NewPassword = "/account/new-password",
 }
 
 const Router = () => {
@@ -29,10 +35,20 @@ const Router = () => {
 				<Route path={RoutesList.Home} element={<PagesContainer />}>
 					<Route path={RoutesList.Home} element={<Home />} />
 					<Route path={RoutesList.SinglePost} element={<Post />} />
-					<Route path={RoutesList.SignIn} element={<SignIn />} />
-					<Route path={RoutesList.Success} element={<Success />} />
-					<Route path={RoutesList.SignUp} element={<SignUp />} />
-					<Route path={RoutesList.Confirm} element={<Confirm />} />
+					<Route
+						path={RoutesList.AccountLogin}
+						element={<FormContainer title="" />}
+					>
+						<Route path={RoutesList.SignIn} element={<SignIn />} />
+						<Route path={RoutesList.Success} element={<Success />} />
+						<Route path={RoutesList.SignUp} element={<SignUp />} />
+						<Route path={RoutesList.Confirm} element={<Confirm />} />
+						<Route
+							path={RoutesList.ResetPassword}
+							element={<ResetPassword />}
+						/>
+						<Route path={RoutesList.NewPassword} element={<NewPassword />} />
+					</Route>
 					<Route
 						path={RoutesList.AddPost}
 						element={

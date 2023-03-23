@@ -5,7 +5,7 @@ import styles from "./Title.module.scss";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 
 type TitleProps = {
-	title: string;
+	title: string
 };
 
 const Title: FC<TitleProps> = ({ title }) => {

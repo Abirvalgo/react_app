@@ -54,7 +54,7 @@ const SignUp = () => {
 
 	useEffect(() => {
 		if (userName.length === 0) {
-			setNameError("Name is required field");
+			setNameError("Name is a required field");
 		} else {
 			setNameError("");
 		}
@@ -62,7 +62,7 @@ const SignUp = () => {
 
 	useEffect(() => {
 		if (email.length === 0) {
-			setEmailError("Email is required field");
+			setEmailError("Email is a required field");
 		} else {
 			setEmailError("");
 		}
@@ -113,65 +113,57 @@ const SignUp = () => {
 			<div className={classNames(styles.title)}>
 				<Title title={"Sign Up"} />
 			</div>
-			<div className={styles.wrapper}>
-				<div
-					className={classNames(styles.inputContainer, {
-						[styles.inputContainerDark]: isDark,
-					})}
-				>
-					<div className={styles.input}>
-						<Input
-							value={userName}
-							onChange={onChangeUserName}
-							type={"text"}
-							title="Name"
-							placeholder="Your name"
-							errorText={nameError}
-						/>
-						<Input
-							value={email}
-							onChange={onChangeEmail}
-							type={"text"}
-							title="Email"
-							placeholder="Your email"
-							errorText={emailError}
-						/>
-						<Input
-							value={password}
-							onChange={onChangePassword}
-							type={"password"}
-							title="Password"
-							placeholder="Your password"
-							errorText={passwordError}
-						/>
-						<Input
-							value={confirmPassword}
-							onChange={onChangeConfirmPassword}
-							type={"password"}
-							title="Confirm password"
-							placeholder="Confirm password"
-							errorText={passwordError}
-						/>
-					</div>
-					<div className={styles.button}>
-						<Button
-							title={"Sign Up"}
-							type={ButtonType.Primary}
-							onClick={onSignUpClick}
-							disabled={!isValid}
-						/>
-					</div>
-					<div
-						className={classNames(styles.signUp, {
-							[styles.signUpDark]: isDark,
-						})}
-					>
-						Already have an account?
-						<NavLink to={RoutesList.SignIn} className={styles.signUpbtn}>
-							Sign Up
-						</NavLink>
-					</div>
-				</div>
+			<div className={styles.input}>
+				<Input
+					value={userName}
+					onChange={onChangeUserName}
+					type={"text"}
+					title="Name"
+					placeholder="Your name"
+					errorText={nameError}
+				/>
+				<Input
+					value={email}
+					onChange={onChangeEmail}
+					type={"text"}
+					title="Email"
+					placeholder="Your email"
+					errorText={emailError}
+				/>
+				<Input
+					value={password}
+					onChange={onChangePassword}
+					type={"password"}
+					title="Password"
+					placeholder="Your password"
+					errorText={passwordError}
+				/>
+				<Input
+					value={confirmPassword}
+					onChange={onChangeConfirmPassword}
+					type={"password"}
+					title="Confirm password"
+					placeholder="Confirm password"
+					errorText={passwordError}
+				/>
+			</div>
+			<div className={styles.button}>
+				<Button
+					title={"Sign Up"}
+					type={ButtonType.Primary}
+					onClick={onSignUpClick}
+					disabled={!isValid}
+				/>
+			</div>
+			<div
+				className={classNames(styles.signUp, {
+					[styles.signUpDark]: isDark,
+				})}
+			>
+				Already have an account?
+				<NavLink to={RoutesList.SignIn} className={styles.signUpbtn}>
+					Sign Up
+				</NavLink>
 			</div>
 		</div>
 	);

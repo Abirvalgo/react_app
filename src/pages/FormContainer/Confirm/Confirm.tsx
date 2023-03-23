@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styles from "./Confirm.module.scss";
 import Title from "../../../components/Title";
 import classNames from "classnames";
