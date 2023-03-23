@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Success.module.scss";
-import Title from "../../components/Title";
+import Title from "../../../components/Title";
 import classNames from "classnames";
-import Button from "../../components/Button";
-import { ButtonType } from "../../utils/@globalTypes";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
-import { RoutesList } from "../Router";
+import Button from "../../../components/Button";
+import { ButtonType } from "../../../utils/@globalTypes";
+import { Theme, useThemeContext } from "../../../context/Theme/Context";
+import { RoutesList } from "../../Router";
 
 const Success = () => {
 	const { theme } = useThemeContext();

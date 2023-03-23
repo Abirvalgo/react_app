@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import PagesContainer from "./PagesContainer";
-import SignIn from "./SignIn";
+import SignIn from "./FormContainer/SignIn";
 import Home from "./Home";
-import Success from "./Success";
-import SignUp from "./SignUp";
-import Confirm from "./Confirm";
+import Success from "./FormContainer/Success";
+import SignUp from "./FormContainer/SignUp";
+import Confirm from "./FormContainer/Confirm";
 import Post from "./Post";
 
 export enum RoutesList {
