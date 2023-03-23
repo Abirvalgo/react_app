@@ -1,14 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.scss";
-import Title from "../../../components/Title";
 import Input from "../../../components/Input";
 import classNames from "classnames";
 import Button from "../../../components/Button";
-import { ButtonType } from "../../../utils/@globalTypes";
+import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
 import { Theme, useThemeContext } from "../../../context/Theme/Context";
-import { RoutesList } from "../../Router";
-import FormContainer from "../FormContainer";
 
 const SignIn = () => {
 	const { theme } = useThemeContext();
@@ -55,7 +52,6 @@ const SignIn = () => {
 	}, [emailError, passwordError]);
 
 	return (
-		// <FormContainer title="Sign In">
 		<>
 			<div className={styles.input}>
 				<Input
@@ -102,7 +98,6 @@ const SignIn = () => {
 				</NavLink>
 			</div>
 		</>
-		// </FormContainer>
 	);
 };
 

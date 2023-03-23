@@ -1,19 +1,32 @@
 import React, { FC, ReactNode } from "react";
-import { Form, NavLink, Outlet } from "react-router-dom";
+import { Form, NavLink, Outlet, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
 import styles from "./FormContainer.module.scss";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
-import { RoutesList } from "../Router";
 import Title from "../../components/Title";
+import { RoutesList } from "../../utils/@globalTypes";
 
-type FormContainerProps = {
-	title: string;
+type Titles = {
+	[k in string]: string;
 };
 
-const FormContainer: FC<FormContainerProps> = ({ title }) => {
+const TITLES: Titles = {
+	[RoutesList.SignIn]: "Sign In",
+	[RoutesList.SignUp]: "Sign Up",
+	[RoutesList.ResetPassword]: "Reset password",
+	[RoutesList.NewPassword]: "New password",
+	[RoutesList.Success]: "Success",
+	[RoutesList.Confirm]: "Registration confirmation",
+};
+
+const FormContainer = () => {
 	const { theme } = useThemeContext();
 	const isDark = theme === Theme.Dark;
+
+	const location = useLocation();
+
+	const title = TITLES[location.pathname];
 
 	return (
 		<div
@@ -30,7 +43,7 @@ const FormContainer: FC<FormContainerProps> = ({ title }) => {
 				Back to home
 			</NavLink>
 			<div className={classNames(styles.title)}>
-				<Title title={"Sign Up"} />
+				<Title title={title || ""} />
 			</div>
 			<div className={styles.wrapper}>
 				<div

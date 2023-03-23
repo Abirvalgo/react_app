@@ -4,9 +4,8 @@ import styles from "./Success.module.scss";
 import Title from "../../../components/Title";
 import classNames from "classnames";
 import Button from "../../../components/Button";
-import { ButtonType } from "../../../utils/@globalTypes";
+import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
 import { Theme, useThemeContext } from "../../../context/Theme/Context";
-import { RoutesList } from "../../Router";
 
 const Success = () => {
 	const { theme } = useThemeContext();
@@ -19,9 +18,6 @@ const Success = () => {
 
 	return (
 		<>
-			{/* <div className={classNames(styles.title)}>
-				<Title title={"Success"} />
-			</div> */}
 			<div
 				className={classNames(styles.email, {
 					[styles.emailDark]: isDark,

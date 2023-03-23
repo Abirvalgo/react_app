@@ -17,8 +17,7 @@ import {
 } from "../../redux/reducers/postSlice";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
 import classNames from "classnames";
-import { RoutesList } from "../Router";
-import { ButtonType, CardType } from "../../utils/@globalTypes";
+import { ButtonType, CardType, RoutesList } from "../../utils/@globalTypes";
 import Button from "../../components/Button";
 
 const Post = () => {

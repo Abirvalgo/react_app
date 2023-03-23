@@ -2,11 +2,10 @@ import React, { useMemo, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import Button from "../../../components/Button";
-import { ButtonType } from "../../../utils/@globalTypes";
+import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
 import { CloseMenu, OpenMenu, UserIcon } from "../../../assets/icons";
 import UserName from "../../../components/User";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
-import { RoutesList } from "../../Router";
 import styles from "./Header.module.scss";
 import classNames from "classnames";
 

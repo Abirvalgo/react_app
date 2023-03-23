@@ -5,9 +5,8 @@ import styles from "./ResetPassword.module.scss";
 import { Theme, useThemeContext } from "../../../context/Theme/Context";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import { ButtonType } from "../../../utils/@globalTypes";
+import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
 import { useNavigate } from "react-router-dom";
-import { RoutesList } from "../../Router";
 
 const ResetPassword = () => {
 	const navigate = useNavigate();

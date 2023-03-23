@@ -11,21 +11,7 @@ import Post from "./Post";
 import FormContainer from "./FormContainer";
 import ResetPassword from "./FormContainer/ResetPassword";
 import NewPassword from "./FormContainer/NewPassword";
-
-export enum RoutesList {
-	Home = "/",
-	SinglePost = "/blog/:id",
-	Search = "/blog/search",
-	AddPost = "/blog/add",
-	SignIn = "/account/sign-in",
-	SignUp = "/account/sign-up",
-	Confirm = "/account/activate/:uid/:token",
-	Success = "/account/sign-up/success",
-	Default = "*",
-	AccountLogin = "/account",
-	ResetPassword = "/account/reset-password",
-	NewPassword = "/account/new-password",
-}
+import { RoutesList } from "../utils/@globalTypes";
 
 const Router = () => {
 	const isLoggedIn = false;
@@ -37,7 +23,7 @@ const Router = () => {
 					<Route path={RoutesList.SinglePost} element={<Post />} />
 					<Route
 						path={RoutesList.AccountLogin}
-						element={<FormContainer title="" />}
+						element={<FormContainer/>}
 					>
 						<Route path={RoutesList.SignIn} element={<SignIn />} />
 						<Route path={RoutesList.Success} element={<Success />} />
