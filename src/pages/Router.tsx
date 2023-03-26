@@ -12,11 +12,13 @@ import FormContainer from "./FormContainer";
 import ResetPassword from "./FormContainer/ResetPassword";
 import NewPassword from "./FormContainer/NewPassword";
 import { RoutesList } from "../utils/@globalTypes";
+import { useSelector } from "react-redux";
+import { AuthSelectors } from "../redux/reducers/authSlice";
 
 // RoutesList в @globaltypes.ts
 
 const Router = () => {
-	const isLoggedIn = false;
+	const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
 	return (
 		<BrowserRouter>
 			<Routes>

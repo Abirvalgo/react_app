@@ -6,8 +6,12 @@ import classNames from "classnames";
 import Button from "../../../components/Button";
 import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
 import { Theme, useThemeContext } from "../../../context/Theme/Context";
+import { useDispatch } from "react-redux";
+import { signInUser } from "../../../redux/reducers/authSlice";
 
 const SignIn = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { theme } = useThemeContext();
 	const isDark = theme === Theme.Dark;
 
@@ -17,8 +21,6 @@ const SignIn = () => {
 	const [emailError, setEmailError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 
-	const navigate = useNavigate();
-
 	const onChangeEmail = (value: string) => {
 		setEmail(value);
 	};
@@ -26,7 +28,12 @@ const SignIn = () => {
 		setPassword(value);
 	};
 	const onSignInClick = () => {
-		navigate(RoutesList.Success);
+		dispatch(
+			signInUser({
+				data: { email, password },
+				callback: () => navigate(RoutesList.Home),
+			})
+		);
 	};
 	const onResetPassword = () => {
 		navigate(RoutesList.ResetPassword);

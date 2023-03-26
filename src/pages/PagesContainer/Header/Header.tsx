@@ -8,13 +8,16 @@ import UserName from "../../../components/User";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import styles from "./Header.module.scss";
 import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthSelectors, logoutUser } from "../../../redux/reducers/authSlice";
 
 const Header = () => {
 	const [isOpened, setOpened] = useState(false);
 
 	const navigate = useNavigate();
 	const location = useLocation();
-	const isLoggedIn = false;
+	const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
+	const dispatch = useDispatch();
 
 	const onClickMenuButton = () => {
 		setOpened(!isOpened);
@@ -24,6 +27,9 @@ const Header = () => {
 		navigate(RoutesList.SignIn);
 	};
 
+	const onLogoutClick = () => {
+		dispatch(logoutUser());
+	};
 	const navButtonsList = useMemo(
 		() => [
 			{
@@ -77,7 +83,7 @@ const Header = () => {
 						<ThemeSwitcher />
 						<Button
 							title={isLoggedIn ? "Log out" : "Sign In"}
-							onClick={isLoggedIn ? () => {} : onAuthButtonClick}
+							onClick={isLoggedIn ? onLogoutClick : onAuthButtonClick}
 							type={ButtonType.Secondary}
 							className={styles.authButton}
 						/>

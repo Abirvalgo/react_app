@@ -9,8 +9,14 @@ export type ActivateUserData = {
 	token: string;
 };
 
+export type SignInUserData = {
+	email: string;
+	password: string;
+};
+
 export type SignUpUserPayload = PayloadWithCallback<UserPayloadData>;
 export type ActivateUserPayload = PayloadWithCallback<ActivateUserData>;
+export type SignInUserPayload = PayloadWithCallback<SignInUserData>;
 
 export type PayloadWithCallback<Data> = {
 	data: Data;
