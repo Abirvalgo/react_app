@@ -13,6 +13,8 @@ import ResetPassword from "./FormContainer/ResetPassword";
 import NewPassword from "./FormContainer/NewPassword";
 import { RoutesList } from "../utils/@globalTypes";
 
+// RoutesList в @globaltypes.ts
+
 const Router = () => {
 	const isLoggedIn = false;
 	return (
@@ -21,10 +23,7 @@ const Router = () => {
 				<Route path={RoutesList.Home} element={<PagesContainer />}>
 					<Route path={RoutesList.Home} element={<Home />} />
 					<Route path={RoutesList.SinglePost} element={<Post />} />
-					<Route
-						path={RoutesList.AccountLogin}
-						element={<FormContainer/>}
-					>
+					<Route path={RoutesList.AccountLogin} element={<FormContainer />}>
 						<Route path={RoutesList.SignIn} element={<SignIn />} />
 						<Route path={RoutesList.Success} element={<Success />} />
 						<Route path={RoutesList.SignUp} element={<SignUp />} />
