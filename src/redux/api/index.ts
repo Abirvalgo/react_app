@@ -3,7 +3,7 @@ import {
 	ActivateUserData,
 	SignInUserData,
 	UserPayloadData,
-} from "../reducers/@types";
+} from "src/redux/reducers/@types";
 
 const API = create({
 	baseURL: "https://studapi.teachmeskills.by",

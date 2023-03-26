@@ -3,9 +3,9 @@ import { Form, NavLink, Outlet, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
 import styles from "./FormContainer.module.scss";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
-import Title from "../../components/Title";
-import { RoutesList } from "../../utils/@globalTypes";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
+import Title from "src/components/Title";
+import { RoutesList } from "src/utils/@globalTypes";
 
 type Titles = {
 	[k in string]: string;

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 import { CardProps } from "./types";
-import { CardSize } from "../../utils/@globalTypes";
+import { CardSize } from "src/utils/@globalTypes";
 import styles from "./Card.module.scss";
 import {
 	BookmarkIcon,
@@ -9,8 +9,8 @@ import {
 	LikeIcon,
 	MoreIcon,
 	BookmarkIconSaved,
-} from "../../assets/icons";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
+} from "src/assets/icons";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,7 +20,7 @@ import {
 	LikeStatus,
 	setStatus,
 	setSavedPosts,
-} from "../../redux/reducers/postSlice";
+} from "src/redux/reducers/postSlice";
 
 const Card: FC<CardProps> = ({ card, size }) => {
 	const { title, text, date, image, id } = card;

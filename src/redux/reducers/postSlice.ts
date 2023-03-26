@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CardType, CardListType } from "../../utils/@globalTypes";
+import { CardType, CardListType } from "src/utils/@globalTypes";
 import { RootState } from "../store";
 //
 export enum LikeStatus {

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
-import { ButtonType } from "../../../utils/@globalTypes";
+import Button from "src/components/Button";
+import Input from "src/components/Input";
+import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./NewPassword.module.scss";
 
 const NewPassword = () => {

@@ -1,13 +1,12 @@
 import React from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styles from "./Confirm.module.scss";
-import Title from "../../../components/Title";
 import classNames from "classnames";
 import Button from "../../../components/Button";
-import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
-import { Theme, useThemeContext } from "../../../context/Theme/Context";
+import { ButtonType, RoutesList } from "src/utils/@globalTypes";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 import { useDispatch } from "react-redux";
-import { activateUser } from "../../../redux/reducers/authSlice";
+import { activateUser } from "src/redux/reducers/authSlice";
 
 const Confirm = () => {
 	const { theme } = useThemeContext();

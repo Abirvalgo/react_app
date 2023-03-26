@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import { CloseMenu } from "../../assets/icons";
+import { CloseMenu } from "src/assets/icons";
 import styles from "./ModalSwitcher.module.scss";
 
 type ModalSwitcherProps = {

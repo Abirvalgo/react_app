@@ -1,7 +1,7 @@
-import React, { FC, ReactNode, useState } from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import styles from "./Tabs.module.scss";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 
 enum TabsNames {
 	ALL,

@@ -5,7 +5,7 @@ import {
 	BookmarkIconSaved,
 	DislikeIcon,
 	LikeIcon,
-} from "../../assets/icons";
+} from "src/assets/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import {
@@ -14,11 +14,11 @@ import {
 	PostSelectors,
 	setSavedPosts,
 	setStatus,
-} from "../../redux/reducers/postSlice";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
+} from "src/redux/reducers/postSlice";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 import classNames from "classnames";
-import { ButtonType, CardType, RoutesList } from "../../utils/@globalTypes";
-import Button from "../../components/Button";
+import { ButtonType, CardType, RoutesList } from "src/utils/@globalTypes";
+import Button from "src/components/Button";
 
 const Post = () => {
 	const { theme } = useThemeContext();

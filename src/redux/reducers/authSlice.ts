@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ACCESS_TOKEN_KEY } from "../../utils/constants";
+import { ACCESS_TOKEN_KEY } from "src/utils/constants";
 
 import { RootState } from "../store";
 import {

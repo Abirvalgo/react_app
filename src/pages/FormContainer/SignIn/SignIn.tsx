@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.scss";
-import Input from "../../../components/Input";
+import Input from "src/components/Input";
 import classNames from "classnames";
-import Button from "../../../components/Button";
-import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
-import { Theme, useThemeContext } from "../../../context/Theme/Context";
+import Button from "src/components/Button";
+import { ButtonType, RoutesList } from "src/utils/@globalTypes";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 import { useDispatch } from "react-redux";
-import { signInUser } from "../../../redux/reducers/authSlice";
+import { signInUser } from "src/redux/reducers/authSlice";
 
 const SignIn = () => {
 	const dispatch = useDispatch();

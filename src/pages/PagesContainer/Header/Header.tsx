@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-import Button from "../../../components/Button";
-import { ButtonType, RoutesList } from "../../../utils/@globalTypes";
-import { CloseMenu, OpenMenu, UserIcon } from "../../../assets/icons";
-import UserName from "../../../components/User";
-import ThemeSwitcher from "../../../components/ThemeSwitcher";
+import Button from "src/components/Button";
+import { ButtonType, RoutesList } from "src/utils/@globalTypes";
+import { CloseMenu, OpenMenu, UserIcon } from "src/assets/icons";
+import UserName from "src/components/User";
+import ThemeSwitcher from "src/components/ThemeSwitcher";
 import styles from "./Header.module.scss";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthSelectors, logoutUser } from "../../../redux/reducers/authSlice";
+import { AuthSelectors, logoutUser } from "src/redux/reducers/authSlice";
 
 const Header = () => {
 	const [isOpened, setOpened] = useState(false);
