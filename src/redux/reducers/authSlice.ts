@@ -14,6 +14,9 @@ type AuthType = {
 	userInfo: UserInfoResponse | null;
 };
 
+// isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY)
+// Если в localstorage есть токен, то вернет его (и !! сделает true),
+// если нет, то вернет undefined и будет false
 const initialState: AuthType = {
 	isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY),
 	userInfo: null,
