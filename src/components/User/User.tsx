@@ -8,7 +8,7 @@ type UserProps = {
 
 const UserName: FC<UserProps> = ({ username }) => {
 	const shortname = username
-		.split(" ")
+		.split("_")
 		.map((word) => word.charAt(0))
 		.join("");
 	return (

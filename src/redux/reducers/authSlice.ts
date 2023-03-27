@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ACCESS_TOKEN_KEY } from "src/utils/constants";
+import { UserInfoResponse } from "../sagas/@types";
 
 import { RootState } from "../store";
 import {
@@ -8,8 +9,14 @@ import {
 	SignInUserPayload,
 } from "./@types";
 
-const initialState = {
+type AuthType = {
+	isLoggedIn: boolean;
+	userInfo: UserInfoResponse | null;
+};
+
+const initialState: AuthType = {
 	isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY),
+	userInfo: null,
 };
 
 const authSlice = createSlice({
@@ -23,13 +30,25 @@ const authSlice = createSlice({
 			state.isLoggedIn = action.payload;
 		},
 		logoutUser: (_, __: PayloadAction<undefined>) => {},
+		getUserInfo: (_, __: PayloadAction<undefined>) => {},
+		setUserInfo: (state, action: PayloadAction<UserInfoResponse | null>) => {
+			state.userInfo = action.payload;
+		},
 	},
 });
 
-export const { signUpUser, activateUser, signInUser, setLoggedIn, logoutUser } =
-	authSlice.actions;
+export const {
+	signUpUser,
+	activateUser,
+	signInUser,
+	setLoggedIn,
+	logoutUser,
+	getUserInfo,
+	setUserInfo,
+} = authSlice.actions;
 export default authSlice.reducer;
 
 export const AuthSelectors = {
 	getLoggedIn: (state: RootState) => state.auth.isLoggedIn,
+	getUserInfo: (state: RootState) => state.auth.userInfo,
 };

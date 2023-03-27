@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import PagesContainer from "./PagesContainer";
@@ -12,13 +12,21 @@ import FormContainer from "./FormContainer";
 import ResetPassword from "./FormContainer/ResetPassword";
 import NewPassword from "./FormContainer/NewPassword";
 import { RoutesList } from "../utils/@globalTypes";
-import { useSelector } from "react-redux";
-import { AuthSelectors } from "../redux/reducers/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
 
 // RoutesList в @globaltypes.ts
 
 const Router = () => {
+	const dispatch = useDispatch();
 	const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			dispatch(getUserInfo());
+		}
+	}, [isLoggedIn]);
+
 	return (
 		<BrowserRouter>
 			<Routes>

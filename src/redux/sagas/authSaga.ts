@@ -5,8 +5,10 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import API from "../api";
 import {
 	activateUser,
+	getUserInfo,
 	logoutUser,
 	setLoggedIn,
+	setUserInfo,
 	signInUser,
 	signUpUser,
 } from "../reducers/authSlice";
@@ -67,13 +69,18 @@ function* logoutUserWorker() {
 	yield put(setLoggedIn(false));
 }
 
-function* getUserInfo() {
+function* getUserInfoWorker() {
 	const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
 	if (accessToken) {
 		const { ok, problem, data }: ApiResponse<any> = yield call(
 			API.getUserInfo,
 			accessToken
 		);
+		if (ok && data) {
+			yield put(setUserInfo(data));
+		} else {
+			console.warn("Error getting user info ", problem);
+		}
 	}
 }
 
@@ -83,5 +90,6 @@ export default function* authSaga() {
 		takeLatest(activateUser, activateUserWorker),
 		takeLatest(signInUser, signInUserWorker),
 		takeLatest(logoutUser, logoutUserWorker),
+		takeLatest(getUserInfo, getUserInfoWorker),
 	]);
 }

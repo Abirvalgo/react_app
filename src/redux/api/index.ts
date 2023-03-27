@@ -30,8 +30,8 @@ const signInUser = (data: SignInUserData) => {
 };
 
 const getUserInfo = (token: string) => {
-	return API.post(
-		"/auth/jwt/create/",
+	return API.get(
+		"/auth/users/me/",
 		{},
 		{
 			headers: {

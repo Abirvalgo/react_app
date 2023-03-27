@@ -16,8 +16,10 @@ const Header = () => {
 
 	const navigate = useNavigate();
 	const location = useLocation();
-	const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
 	const dispatch = useDispatch();
+	const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
+	const userInfo = useSelector(AuthSelectors.getUserInfo);
+	const userName = userInfo?.username ? userInfo?.username : "Random Name";
 
 	const onClickMenuButton = () => {
 		setOpened(!isOpened);
@@ -50,8 +52,8 @@ const Header = () => {
 					type={ButtonType.Primary}
 					className={styles.button}
 				/>
-				{isLoggedIn ? (
-					<UserName username={"Artem Malkin"} />
+				{isLoggedIn && userInfo ? (
+					<UserName username={userName} />
 				) : (
 					<Button
 						title={<UserIcon />}
@@ -64,7 +66,7 @@ const Header = () => {
 			{isOpened && (
 				<div className={styles.menuContainer}>
 					<div className={styles.actionsContainer}>
-						{isLoggedIn && <UserName username={"Artem Malkin"} />}
+						{isLoggedIn && userInfo ? <UserName username={userName} /> : null}
 						{navButtonsList.map(({ key, title }) => {
 							return (
 								<NavLink
