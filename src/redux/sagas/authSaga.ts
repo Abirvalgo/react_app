@@ -17,8 +17,9 @@ import {
 	SignInUserPayload,
 	SignUpUserPayload,
 } from "../reducers/@types";
-import { SignInResponse, SignUpUserResponse } from "./@types";
+import { SignInResponse, SignUpUserResponse, UserInfoResponse } from "./@types";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../utils/constants";
+import callCheckingAuth from "./callCheckingAuth";
 
 function* signUpUserWorker(action: PayloadAction<SignUpUserPayload>) {
 	const { data, callback } = action.payload;
@@ -69,18 +70,27 @@ function* logoutUserWorker() {
 	yield put(setLoggedIn(false));
 }
 
+// function* getUserInfoWorker() {
+// 	const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+// 	if (accessToken) {
+// 		const { ok, problem, data }: ApiResponse<any> = yield call(
+// 			API.getUserInfo,
+// 			accessToken
+// 		);
+// 		if (ok && data) {
+// 			yield put(setUserInfo(data));
+// 		} else {
+// 			console.warn("Error getting user info ", problem);
+// 		}
+// 	}
+// }
 function* getUserInfoWorker() {
-	const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-	if (accessToken) {
-		const { ok, problem, data }: ApiResponse<any> = yield call(
-			API.getUserInfo,
-			accessToken
-		);
-		if (ok && data) {
-			yield put(setUserInfo(data));
-		} else {
-			console.warn("Error getting user info ", problem);
-		}
+	const { ok, problem, data }: ApiResponse<UserInfoResponse> =
+		yield callCheckingAuth(API.getUserInfo);
+	if (ok && data) {
+		yield put(setUserInfo(data));
+	} else {
+		console.warn("Error getting user info ", problem);
 	}
 }
 
