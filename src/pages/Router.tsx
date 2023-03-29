@@ -14,6 +14,7 @@ import NewPassword from "./FormContainer/NewPassword";
 import { RoutesList } from "../utils/@globalTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
+import { getMyPosts } from "src/redux/reducers/postSlice";
 
 // RoutesList в @globaltypes.ts
 
@@ -24,6 +25,7 @@ const Router = () => {
 	useEffect(() => {
 		if (isLoggedIn) {
 			dispatch(getUserInfo());
+			dispatch(getMyPosts());
 		}
 	}, [isLoggedIn]);
 

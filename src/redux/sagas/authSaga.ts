@@ -20,6 +20,7 @@ import {
 import { SignInResponse, SignUpUserResponse, UserInfoResponse } from "./@types";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../utils/constants";
 import callCheckingAuth from "./callCheckingAuth";
+import { setMyPosts } from "../reducers/postSlice";
 
 function* signUpUserWorker(action: PayloadAction<SignUpUserPayload>) {
 	const { data, callback } = action.payload;
@@ -68,6 +69,8 @@ function* logoutUserWorker() {
 	localStorage.removeItem(ACCESS_TOKEN_KEY);
 	localStorage.removeItem(REFRESH_TOKEN_KEY);
 	yield put(setLoggedIn(false));
+	yield put(setUserInfo(null));
+	yield put(setMyPosts([]));
 }
 
 // function* getUserInfoWorker() {

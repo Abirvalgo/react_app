@@ -14,7 +14,8 @@ type initialStateType = {
 	dislikedPosts: CardListType;
 	savedPosts: CardListType;
 	postsList: CardListType;
-	singlePost: CardType | undefined
+	singlePost: CardType | undefined;
+	myPosts: CardListType;
 };
 //
 const initialState: initialStateType = {
@@ -25,6 +26,7 @@ const initialState: initialStateType = {
 	savedPosts: [],
 	postsList: [],
 	singlePost: undefined,
+	myPosts: [],
 };
 
 const postSlice = createSlice({
@@ -32,7 +34,7 @@ const postSlice = createSlice({
 	initialState,
 	reducers: {
 		getSinglePost: (_, __: PayloadAction<string>) => {},
-		setSinglePost:(state, action: PayloadAction<CardType>) => {
+		setSinglePost: (state, action: PayloadAction<CardType>) => {
 			state.singlePost = action.payload;
 		},
 		getAllPosts: (_, __: PayloadAction<undefined>) => {},
@@ -84,6 +86,10 @@ const postSlice = createSlice({
 				state.savedPosts.splice(savedPostsIndex, 1);
 			}
 		},
+		getMyPosts: (_, __: PayloadAction<undefined>) => {},
+		setMyPosts: (state, action: PayloadAction<CardListType>) => {
+			state.myPosts = action.payload;
+		},
 	},
 });
 
@@ -95,7 +101,9 @@ export const {
 	getAllPosts,
 	setAllPosts,
 	getSinglePost,
-	setSinglePost
+	setSinglePost,
+	getMyPosts,
+	setMyPosts,
 } = postSlice.actions;
 export default postSlice.reducer;
 
@@ -106,7 +114,8 @@ export const PostSelectors = {
 	getDislikedPosts: (state: RootState) => state.post.dislikedPosts,
 	getSavedPosts: (state: RootState) => state.post.savedPosts,
 	getAllPosts: (state: RootState) => state.post.postsList,
-	getSinglePost:(state:RootState) => state.post.singlePost
+	getSinglePost: (state: RootState) => state.post.singlePost,
+	getMyPosts: (state: RootState) => state.post.myPosts,
 };
 
 // const changeThemeAction = (payload) => {
