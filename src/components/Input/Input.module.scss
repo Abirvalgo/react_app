@@ -23,7 +23,8 @@
 	margin-top: 8px;
 	outline: none;
 
-	&:focus {
+	&:focus,
+	&:hover {
 		border: 2px solid $medium;
 	}
 

@@ -15,6 +15,7 @@ import { RoutesList } from "../utils/@globalTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
 import { getMyPosts } from "src/redux/reducers/postSlice";
+import Search from "./Search";
 
 // RoutesList в @globaltypes.ts
 
@@ -52,6 +53,7 @@ const Router = () => {
 							isLoggedIn ? <Home /> : <Navigate to={RoutesList.SignIn} />
 						}
 					/>
+					<Route path={RoutesList.Search} element={<Search />} />
 					<Route path={RoutesList.Default} element={<div>404 NOT FOUND</div>} />
 				</Route>
 			</Routes>

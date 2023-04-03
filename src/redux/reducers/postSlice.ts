@@ -16,6 +16,8 @@ type initialStateType = {
 	postsList: CardListType;
 	singlePost: CardType | undefined;
 	myPosts: CardListType;
+	searchedPosts: CardListType;
+	searchValue: string;
 };
 //
 const initialState: initialStateType = {
@@ -27,6 +29,8 @@ const initialState: initialStateType = {
 	postsList: [],
 	singlePost: undefined,
 	myPosts: [],
+	searchedPosts: [],
+	searchValue: "",
 };
 
 const postSlice = createSlice({
@@ -90,6 +94,12 @@ const postSlice = createSlice({
 		setMyPosts: (state, action: PayloadAction<CardListType>) => {
 			state.myPosts = action.payload;
 		},
+		getSearchedPosts: (state, action: PayloadAction<string>) => {
+			state.searchValue = action.payload;
+		},
+		setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
+			state.searchedPosts = action.payload;
+		},
 	},
 });
 
@@ -104,6 +114,8 @@ export const {
 	setSinglePost,
 	getMyPosts,
 	setMyPosts,
+	getSearchedPosts,
+	setSearchedPosts,
 } = postSlice.actions;
 export default postSlice.reducer;
 
@@ -116,6 +128,8 @@ export const PostSelectors = {
 	getAllPosts: (state: RootState) => state.post.postsList,
 	getSinglePost: (state: RootState) => state.post.singlePost,
 	getMyPosts: (state: RootState) => state.post.myPosts,
+	getSearchedPosts: (state: RootState) => state.post.searchedPosts,
+	getSearchValue: (state: RootState) => state.post.searchValue,
 };
 
 // const changeThemeAction = (payload) => {

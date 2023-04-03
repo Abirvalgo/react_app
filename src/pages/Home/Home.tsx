@@ -19,7 +19,8 @@ const Home = () => {
 
 	const postsList = useSelector(PostSelectors.getAllPosts);
 	const favouriteList = useSelector(PostSelectors.getLikedPosts);
-
+	const myPostsList = useSelector(PostSelectors.getMyPosts);
+	const favouritesList = useSelector(PostSelectors.getSavedPosts);
 	const { theme } = useThemeContext();
 
 	const getCurrentList = () => {
@@ -27,11 +28,9 @@ const Home = () => {
 			case TabsNames.Popular:
 				return favouriteList;
 			case TabsNames.MyPosts:
-				//TODO дописать сюда мои посты из ДЗ на 30/03/2023
-				return [];
+				return myPostsList;
 			case TabsNames.Favourites:
-				//TODO дописать сюда посты из тех, которые сохранены в избранное
-				return [];
+				return favouritesList;
 			case TabsNames.All:
 			default:
 				return postsList;

@@ -3,8 +3,10 @@ import { ApiResponse } from "apisauce";
 
 import {
 	getAllPosts,
+	getSearchedPosts,
 	getSinglePost,
 	setAllPosts,
+	setSearchedPosts,
 	setSinglePost,
 } from "../reducers/postSlice";
 import API from "../api";
@@ -35,9 +37,22 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
 	}
 }
 
+function* getSearchedPostsWorker(action: PayloadAction<string>) {
+	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
+		API.getPosts,
+		action.payload
+	);
+	if (ok && data) {
+		yield put(setSearchedPosts(data.results));
+	} else {
+		console.warn("Error getting all posts", problem);
+	}
+}
+
 export default function* postsSaga() {
 	yield all([
 		takeLatest(getAllPosts, getAllPostsWorker),
 		takeLatest(getSinglePost, getSinglePostWorker),
+		takeLatest(getSearchedPosts, getSearchedPostsWorker),
 	]);
 }

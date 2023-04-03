@@ -9,8 +9,9 @@ const API = create({
 	baseURL: "https://studapi.teachmeskills.by",
 });
 
-const getPosts = () => {
-	return API.get("/blog/posts/?limit=12");
+const getPosts = (search?: string) => {
+	// return API.get("/blog/posts/?limit=12");
+	return API.get("/blog/posts/", { limit: 12, search });
 };
 
 const getSinglePost = (id: string) => {
