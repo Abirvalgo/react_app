@@ -9,6 +9,13 @@ export type CardType = {
 	author: number;
 };
 
+export enum TabsNames {
+	All,
+	MyPosts,
+	Popular,
+	Favourites,
+}
+
 export type CardListType = CardType[];
 
 export enum CardSize {
@@ -22,7 +29,6 @@ export enum ButtonType {
 	Secondary = "Secondary",
 	Error = "Error",
 }
-
 
 export enum RoutesList {
 	Home = "/",
