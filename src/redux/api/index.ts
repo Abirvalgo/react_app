@@ -4,15 +4,17 @@ import {
 	SignInUserData,
 	UserPayloadData,
 } from "src/redux/reducers/@types";
+import { PER_PAGE } from "src/utils/constants";
 
 const API = create({
 	baseURL: "https://studapi.teachmeskills.by",
 });
 
-const getPosts = (search?: string) => {
-	// return API.get("/blog/posts/?limit=12");
-	return API.get("/blog/posts/", { limit: 12, search });
+const getPosts = (offset: number, search?: string) => {
+	return API.get("/blog/posts/", { limit: PER_PAGE, search, offset });
 };
+// return API.get("/blog/posts/?limit=12");
+//  { limit: 12, search });
 
 const getSinglePost = (id: string) => {
 	return API.get(`/blog/posts/${id}/`);
