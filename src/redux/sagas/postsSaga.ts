@@ -17,10 +17,12 @@ import { GetAllPostsPayload } from "../reducers/@types";
 
 // function* getAllPostsWorker() {
 function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
-	const { offset } = action.payload;
+	const { offset,search, ordering ,} = action.payload;
 	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
 		API.getPosts,
-		offset
+		offset,
+		search,
+		ordering
 	);
 	if (ok && data) {
 		yield put(setAllPosts({ cardList: data.results, postsCount: data.count }));

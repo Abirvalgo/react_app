@@ -27,6 +27,8 @@ export type PayloadWithCallback<Data> = {
 
 export type GetAllPostsPayload = {
 	offset: number;
+	ordering?: string;
+	search?: string;
 };
 
 export type SetAllPostsPayload = {

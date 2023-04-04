@@ -4,13 +4,14 @@ import ReactPaginate from "react-paginate";
 import Title from "src/components/Title";
 import Tabs from "src/components/Tabs";
 import CardsList from "src/components/CardsList";
-import styles from "./Home.module.scss";
 import classNames from "classnames";
 import { Theme, useThemeContext } from "src/context/Theme/Context";
 import SelectedPostModal from "./SelectedPostModal";
 import { getAllPosts, PostSelectors } from "src/redux/reducers/postSlice";
-import { TabsNames } from "src/utils/@globalTypes";
+import { ButtonType, TabsNames } from "src/utils/@globalTypes";
 import { PER_PAGE } from "src/utils/constants";
+import Button from "src/components/Button";
+import styles from "./Home.module.scss";
 
 enum Order {
 	Title = "title",
@@ -20,12 +21,7 @@ enum Order {
 const Home = () => {
 	const [activeTab, setActiveTab] = useState(TabsNames.All);
 	const [currentPage, setCurrentPage] = useState(1);
-
-	const onTabClick = (key: TabsNames) => () => {
-		setActiveTab(key);
-		setCurrentPage(1);
-	};
-	const dispatch = useDispatch();
+	const [ordering, setOrdering] = useState("");
 
 	const postsList = useSelector(PostSelectors.getAllPosts);
 	const popularList = useSelector(PostSelectors.getLikedPosts);
@@ -33,6 +29,8 @@ const Home = () => {
 	const favouritesList = useSelector(PostSelectors.getSavedPosts);
 	const postsCount = useSelector(PostSelectors.getAllPostsCount);
 	const pagesCount = Math.ceil(postsCount / PER_PAGE);
+
+	const dispatch = useDispatch();
 	const { theme } = useThemeContext();
 
 	const getCurrentList = () => {
@@ -53,13 +51,28 @@ const Home = () => {
 	// 	dispatch(getAllPosts());
 	// }, []);
 
-	useEffect(() => {
-		const offset = PER_PAGE * (currentPage - 1);
-		dispatch(getAllPosts({ offset }));
-	}, [currentPage]);
+	const onTabClick = (key: TabsNames) => () => {
+		setActiveTab(key);
+		setCurrentPage(1);
+	};
+
 	const onPageChange = ({ selected }: { selected: number }) => {
 		setCurrentPage(selected + 1);
 	};
+
+	const onOrderClick = (order: Order) => () => {
+		if (order === ordering) {
+			setOrdering("");
+			setCurrentPage(1);
+		} else {
+			setOrdering(order);
+		}
+	};
+
+	useEffect(() => {
+		const offset = PER_PAGE * (currentPage - 1);
+		dispatch(getAllPosts({ offset, ordering }));
+	}, [currentPage, ordering]);
 
 	return (
 		<div
@@ -69,6 +82,24 @@ const Home = () => {
 		>
 			<Title title={"Blog"} />
 			<Tabs activeTab={activeTab} onTabClick={onTabClick} />
+			<div className={styles.orderButton}>
+				<Button
+					title={"Title"}
+					onClick={onOrderClick(Order.Title)}
+					type={ButtonType.Secondary}
+					className={classNames(styles.sortBtn, {
+						[styles.activeSortBtn]: ordering === Order.Title,
+					})}
+				/>
+				<Button
+					title={"Date"}
+					onClick={onOrderClick(Order.Date)}
+					type={ButtonType.Secondary}
+					className={classNames(styles.sortBtn, {
+						[styles.activeSortBtn]: ordering === Order.Date,
+					})}
+				/>
+			</div>
 			<CardsList cardsList={getCurrentList()} />
 			<SelectedPostModal />
 			{activeTab !== TabsNames.Popular &&
