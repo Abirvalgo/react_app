@@ -7,6 +7,7 @@ import {
 	getSearchedPosts,
 	getSinglePost,
 	setAllPosts,
+	setAllPostsLoading,
 	setSearchedPosts,
 	setSinglePost,
 } from "../reducers/postSlice";
@@ -19,6 +20,7 @@ import callCheckingAuth from "./callCheckingAuth";
 
 // function* getAllPostsWorker() {
 function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
+	yield put(setAllPostsLoading(true));
 	const { offset, search, ordering } = action.payload;
 	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
 		API.getPosts,
@@ -32,6 +34,7 @@ function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
 	} else {
 		console.warn("Error getting all posts", problem);
 	}
+	yield put(setAllPostsLoading(false));
 }
 
 function* getSinglePostWorker(action: PayloadAction<string>) {
