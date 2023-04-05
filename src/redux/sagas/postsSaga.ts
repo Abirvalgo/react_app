@@ -2,6 +2,7 @@ import { takeLatest, all, call, put } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
 
 import {
+	addNewPost,
 	getAllPosts,
 	getSearchedPosts,
 	getSinglePost,
@@ -13,11 +14,12 @@ import API from "../api";
 import { AllPostsResponse } from "./@types";
 import { CardType } from "../../utils/@globalTypes";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { GetAllPostsPayload } from "../reducers/@types";
+import { AddPostPayload, GetAllPostsPayload } from "../reducers/@types";
+import callCheckingAuth from "./callCheckingAuth";
 
 // function* getAllPostsWorker() {
 function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
-	const { offset,search, ordering ,} = action.payload;
+	const { offset, search, ordering } = action.payload;
 	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
 		API.getPosts,
 		offset,
@@ -57,10 +59,24 @@ function* getSearchedPostsWorker(action: PayloadAction<string>) {
 	}
 }
 
+function* addNewPostWorker(action: PayloadAction<AddPostPayload>) {
+	const { data, callback } = action.payload;
+	const { ok, problem }: ApiResponse<undefined> = yield callCheckingAuth(
+		API.addPost,
+		data
+	);
+	if (ok) {
+		callback();
+	} else {
+		console.warn("Error adding post", problem);
+	}
+}
+
 export default function* postsSaga() {
 	yield all([
 		takeLatest(getAllPosts, getAllPostsWorker),
 		takeLatest(getSinglePost, getSinglePostWorker),
 		takeLatest(getSearchedPosts, getSearchedPostsWorker),
+		takeLatest(addNewPost, addNewPostWorker),
 	]);
 }
