@@ -14,6 +14,7 @@ const PagesContainer = () => {
 			className={classNames(styles.container, {
 				[styles.darkContainer]: theme === Theme.Dark,
 			})}
+			id="scrollableDiv"
 		>
 			<Header />
 			<div className={styles.mainInfo}>
