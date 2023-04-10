@@ -10,19 +10,27 @@ import { useDispatch } from "react-redux";
 import { signUpUser } from "src/redux/reducers/authSlice";
 
 const SignUp = () => {
-	const [userName, setUserName] = useState("");
+	const { theme } = useThemeContext();
+	const isDark = theme === Theme.Dark;
+
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const { theme } = useThemeContext();
-	const isDark = theme === Theme.Dark;
+	const [nameTouched, setNameTouched] = useState(false);
+	const [passwordTouched, setPasswordTouched] = useState(false);
+	const [emailTouched, setEmailTouched] = useState(false);
+
+	const [nameError, setNameError] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passwordError, setPasswordError] = useState("");
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const onChangeUserName = (value: string) => {
-		setUserName(value);
+		setName(value);
 	};
 	const onChangeEmail = (value: string) => {
 		setEmail(value);
@@ -33,56 +41,74 @@ const SignUp = () => {
 	const onChangeConfirmPassword = (value: string) => {
 		setConfirmPassword(value);
 	};
+	const onBlurEmail = () => {
+		setEmailTouched(true);
+	};
 
+	const onBlurPassword = () => {
+		setPasswordTouched(true);
+	};
+
+	const onBlurName = () => {
+		setNameTouched(true);
+	};
 	// const onSignUpClick = () => {
 	// 	navigate(RoutesList.Confirm);
 	// };
 	const onSignUpClick = () => {
 		dispatch(
 			signUpUser({
-				data: { username: userName, email, password },
+				data: { username: name, email, password },
 				callback: () => navigate(RoutesList.SignIn),
 			})
 		);
 	};
 
-	const [nameError, setNameError] = useState("");
-	const [emailError, setEmailError] = useState("");
-	const [passwordError, setPasswordError] = useState("");
-
 	useEffect(() => {
-		if (userName.length === 0) {
+		if (name.length === 0 && nameTouched) {
 			setNameError("Name is a required field");
 		} else {
 			setNameError("");
 		}
-	}, [userName]);
+	}, [name, nameTouched]);
 
 	useEffect(() => {
-		if (email.length === 0) {
+		if (email.length === 0 && emailTouched) {
 			setEmailError("Email is a required field");
 		} else {
 			setEmailError("");
 		}
-	}, [email]);
+	}, [email, emailTouched]);
 
 	useEffect(() => {
-		if (password !== confirmPassword) {
-			setPasswordError("Passwords must match");
-		} else if (password.length === 0 || confirmPassword.length === 0) {
-			setPasswordError("Password is required field");
-		} else {
-			setPasswordError("");
+		if (passwordTouched) {
+			if (password !== confirmPassword) {
+				setPasswordError("Passwords must match");
+			} else if (password.length === 0 || confirmPassword.length === 0) {
+				setPasswordError("Password is required field");
+			} else {
+				setPasswordError("");
+			}
 		}
-	}, [confirmPassword, password]);
+	}, [confirmPassword, password, passwordTouched]);
 
 	const isValid = useMemo(() => {
 		return (
 			nameError.length === 0 &&
 			emailError.length === 0 &&
-			passwordError.length === 0
+			passwordError.length === 0 &&
+			nameTouched &&
+			emailTouched &&
+			passwordTouched
 		);
-	}, [nameError, emailError, passwordError]);
+	}, [
+		nameError,
+		emailError,
+		passwordError,
+		nameTouched,
+		emailTouched,
+		passwordTouched,
+	]);
 
 	// Используем, если не надо показывать никаких ошибок пользователю
 	// const isValid = useMemo(() => {
@@ -98,8 +124,9 @@ const SignUp = () => {
 		<>
 			<div className={styles.input}>
 				<Input
-					value={userName}
+					value={name}
 					onChange={onChangeUserName}
+					onBlur={onBlurName}
 					type={"text"}
 					title="Name"
 					placeholder="Your name"
@@ -108,6 +135,7 @@ const SignUp = () => {
 				<Input
 					value={email}
 					onChange={onChangeEmail}
+					onBlur={onBlurEmail}
 					type={"text"}
 					title="Email"
 					placeholder="Your email"
@@ -116,6 +144,7 @@ const SignUp = () => {
 				<Input
 					value={password}
 					onChange={onChangePassword}
+					onBlur={onBlurPassword}
 					type={"password"}
 					title="Password"
 					placeholder="Your password"
@@ -124,6 +153,7 @@ const SignUp = () => {
 				<Input
 					value={confirmPassword}
 					onChange={onChangeConfirmPassword}
+					onBlur={onBlurPassword}
 					type={"password"}
 					title="Confirm password"
 					placeholder="Confirm password"
