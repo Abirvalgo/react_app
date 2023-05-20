@@ -1,16 +1,18 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, KeyboardEvent } from "react";
 import classNames from "classnames";
 import styles from "./Input.module.scss";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 
 type InputProps = {
-	title: string;
+	title?: string;
 	placeholder: string;
 	value: string;
 	onChange: (value: string) => void;
+	onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
 	disabled?: boolean;
 	errorText?: string;
-	type: string;
+	type?: string;
+	inputClassName?: string;
 };
 
 const Input: FC<InputProps> = ({
@@ -21,6 +23,8 @@ const Input: FC<InputProps> = ({
 	disabled,
 	errorText,
 	type,
+	inputClassName,
+	onKeyDown,
 }) => {
 	const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
 		onChange(e.target.value);
@@ -28,15 +32,18 @@ const Input: FC<InputProps> = ({
 	const { theme } = useThemeContext();
 	return (
 		<div>
-			<p
-				className={classNames(styles.title, {
-					[styles.darkTitle]: theme === Theme.Dark,
-				})}
-			>
-				{title}
-			</p>
+			{title && (
+				<div
+					className={classNames(styles.title, {
+						[styles.darkTitle]: theme === Theme.Dark,
+					})}
+				>
+					{title}
+				</div>
+			)}
+
 			<input
-				className={classNames(styles.input, {
+				className={classNames(styles.input, inputClassName, {
 					[styles.disabled]: disabled,
 					[styles.error]: errorText,
 				})}
@@ -44,6 +51,7 @@ const Input: FC<InputProps> = ({
 				placeholder={placeholder}
 				value={value}
 				disabled={disabled}
+				onKeyDown={onKeyDown}
 				onChange={onChangeText}
 			/>
 			{errorText && <div className={styles.errorText}>{errorText}</div>}

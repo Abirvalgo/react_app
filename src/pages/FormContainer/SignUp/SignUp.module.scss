@@ -12,6 +12,10 @@
 	line-height: 24px;
 	color: $secondary;
 	margin-bottom: 32px;
+	text-decoration: none;
+	&:hover {
+		cursor: pointer;
+	}
 }
 .backHomeDark {
 	color: $white;
@@ -61,14 +65,18 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 24px;
-	& a {
+	.signUpbtn {
 		color: $primary;
 		margin-left: 4px;
+		text-decoration: none;
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }
 .signUpDark {
 	color: $medium;
-	& a {
+	.signUpbtn {
 		color: $primary-secondary;
 	}
 }

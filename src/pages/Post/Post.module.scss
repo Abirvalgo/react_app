@@ -1,19 +1,82 @@
-@import "src/assets/colors";
+@import "../../assets/colors.scss";
+
 .container {
-	width: 1120px;
+	max-width: 1120px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	gap: 30px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid $medium;
 }
+.image {
+	width: 992px;
+	height: 518px;
+	object-fit: cover;
+	object-position: 50% 50%;
+}
+.title {
+	font-weight: 700;
+	font-size: 56px;
+	line-height: 80px;
+	display: flex;
+	color: $secondary;
+}
+.text {
+	max-width: 922px;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 32px;
+	color: $secondary;
+}
+.iconsWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 922px;
+	width: 100%;
+}
+.iconContainer {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+}
+.iconWrapper {
+	display: flex;
+	width: 45px;
+	gap: 8px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	color: $secondary;
+}
+
+.darkIconContainer {
+	div > svg > path {
+		fill: $white;
+	}
+}
+.darkContainer {
+	border-bottom-color: $gray;
+}
+
 .breadCrumbs {
 	display: flex;
 	gap: 8px;
 	margin-bottom: 32px;
 }
 .home {
+	text-decoration: none;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 24px;
 	color: $secondary;
+	&:hover {
+		color: $primary-secondary;
+	}
+}
+.darkItem {
+	color: $white;
 }
 .postNum {
 	font-weight: 400;
@@ -35,23 +98,10 @@
 	align-items: center;
 	gap: 48px;
 }
-.title {
-	font-weight: 700;
-	font-size: 56px;
-	line-height: 80px;
-	display: flex;
-	color: $secondary;
-}
+
 .image {
 	width: 992px;
 	height: 518px;
-}
-.text {
-	max-width: 922px;
-	font-weight: 400;
-	font-size: 18px;
-	line-height: 32px;
-	color: $secondary;
 }
 .icons {
 	display: flex;
@@ -84,15 +134,15 @@
 }
 .iconBookMark {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 16px 32px;
-	width: 237px;
-	height: 56px;
-	background: $light;
-	border-radius: 2px;
-	font-weight: 600;
-	font-size: 18px;
-	color: $secondary;
-	box-sizing: border-box;
+	// align-items: center;
+	// justify-content: center;
+	// padding: 16px 32px;
+	// width: 237px;
+	// height: 56px;
+	// background: $light;
+	// border-radius: 2px;
+	// font-weight: 600;
+	// font-size: 18px;
+	// color: $secondary;
+	// box-sizing: border-box;
 }

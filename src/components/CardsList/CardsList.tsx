@@ -1,11 +1,12 @@
 import React, { FC } from "react";
 
-import Card, { CardType } from "../Card";
-import { CardSize } from "../Card/types";
+import Card from "../Card";
 import styles from "./CardsList.module.scss";
+import { CardListType, CardSize } from "src/utils/@globalTypes";
+import EmptyState from "../EmptyState";
 
 type CardsListProps = {
-	cardsList: CardType[];
+	cardsList: CardListType;
 };
 const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 	return cardsList.length > 0 ? (
@@ -28,7 +29,12 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 				})}
 			</div>
 		</div>
-	) : null;
+	) : (
+		<EmptyState
+			title="Sorry, there are no posts"
+			description="Try to check out another category"
+		/>
+	);
 };
 
 export default CardsList;

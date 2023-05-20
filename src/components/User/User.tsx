@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 
 import styles from "./User.module.scss";
 
@@ -6,9 +6,9 @@ type UserProps = {
 	username: string;
 };
 
-const User: FC<UserProps> = ({ username }) => {
+const UserName: FC<UserProps> = ({ username }) => {
 	const shortname = username
-		.split(" ")
+		.split("_")
 		.map((word) => word.charAt(0))
 		.join("");
 	return (
@@ -19,4 +19,4 @@ const User: FC<UserProps> = ({ username }) => {
 	);
 };
 
-export default User;
+export default UserName;

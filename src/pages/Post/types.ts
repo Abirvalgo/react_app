@@ -11,3 +11,4 @@ export type PostType = {
 export type PostProps = {
 	post: PostType;
 };
+export {}

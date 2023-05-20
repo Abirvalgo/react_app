@@ -11,6 +11,12 @@
 	height: 450px;
 }
 
+.searchContainer {
+	max-width: 100%;
+	height: 206px;
+	gap: 44px;
+}
+
 .footer {
 	display: flex;
 	justify-content: space-between;
@@ -24,9 +30,9 @@
 	justify-content: space-between;
 }
 .image {
-	max-width: 256px;
+	width: 256px;
 	object-fit: cover;
-	max-height: 244px;
+	height: 244px;
 }
 .text {
 	font-weight: 400;
@@ -39,6 +45,10 @@
 	font-size: 32px;
 	line-height: 44px;
 	color: $secondary;
+	&:hover {
+		cursor: pointer;
+		color: $primary-secondary;
+	}
 }
 .date {
 	font-weight: 400;
@@ -72,8 +82,8 @@
 }
 
 .mediumImage {
-	max-width: 352px;
-	max-height: 246px;
+	width: 352px;
+	height: 246px;
 }
 
 .smallContainer {
@@ -81,12 +91,18 @@
 	max-width: 354px;
 }
 .smallImage {
-	max-height: 96px;
-	max-width: 96px;
+	height: 96px;
+	width: 96px;
 }
 .smallInfoContainer {
 	gap: 34px;
 }
+.searchInfoContainer {
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	gap: 32px;
+}
+
 .darkTitle {
 	color: $white;
 }
@@ -97,4 +113,14 @@
 }
 .darkContainer {
 	border-bottom-color: $gray;
+}
+
+.iconWrapper {
+	display: flex;
+	width: 40px;
+	gap: 8px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 24px;
+	color: $secondary;
 }
