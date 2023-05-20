@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { CardType, CardListType } from "src/utils/@globalTypes";
-import { GetAllPostsPayload, SetAllPostsPayload } from "./@types";
+import {
+	AddPostPayload,
+	GetAllPostsPayload,
+	GetSearchPostsPayload,
+	SetAllPostsPayload,
+	SetSearchedPostsPayload,
+} from "./@types";
 
 export enum LikeStatus {
 	Like = "like",
@@ -20,6 +26,8 @@ type initialStateType = {
 	searchedPosts: CardListType;
 	searchValue: string;
 	postsCount: number;
+	searchedPostsCount: number;
+	isAllPostsLoading: boolean;
 };
 //
 const initialState: initialStateType = {
@@ -34,6 +42,8 @@ const initialState: initialStateType = {
 	searchedPosts: [],
 	searchValue: "",
 	postsCount: 0,
+	searchedPostsCount: 0,
+	isAllPostsLoading: false,
 };
 
 const postSlice = createSlice({
@@ -54,6 +64,9 @@ const postSlice = createSlice({
 		) => {
 			state.postsList = cardList;
 			state.postsCount = postsCount;
+		},
+		setAllPostsLoading: (state, action: PayloadAction<boolean>) => {
+			state.isAllPostsLoading = action.payload;
 		},
 		setSelectedPost: (state, action: PayloadAction<CardType | null>) => {
 			state.selectedPost = action.payload;
@@ -104,12 +117,22 @@ const postSlice = createSlice({
 		setMyPosts: (state, action: PayloadAction<CardListType>) => {
 			state.myPosts = action.payload;
 		},
-		getSearchedPosts: (state, action: PayloadAction<string>) => {
-			state.searchValue = action.payload;
+		getSearchedPosts: (state, action: PayloadAction<GetSearchPostsPayload>) => {
+			state.searchValue = action.payload.searchValue;
 		},
-		setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
-			state.searchedPosts = action.payload;
+		setSearchedPosts: (
+			state,
+			action: PayloadAction<SetSearchedPostsPayload>
+		) => {
+			const { isOverwrite, cardList, postsCount } = action.payload;
+			state.searchedPostsCount = postsCount;
+			if (isOverwrite) {
+				state.searchedPosts = cardList;
+			} else {
+				state.searchedPosts.push(...cardList);
+			}
 		},
+		addNewPost: (_, __: PayloadAction<AddPostPayload>) => {},
 	},
 });
 
@@ -126,6 +149,8 @@ export const {
 	setMyPosts,
 	getSearchedPosts,
 	setSearchedPosts,
+	addNewPost,
+	setAllPostsLoading,
 } = postSlice.actions;
 export default postSlice.reducer;
 
@@ -141,6 +166,8 @@ export const PostSelectors = {
 	getSearchedPosts: (state: RootState) => state.post.searchedPosts,
 	getSearchValue: (state: RootState) => state.post.searchValue,
 	getAllPostsCount: (state: RootState) => state.post.postsCount,
+	getAllPostsLoading: (state: RootState) => state.post.isAllPostsLoading,
+	getSearchedPostsCount: (state: RootState) => state.post.searchedPostsCount,
 };
 
 // const changeThemeAction = (payload) => {

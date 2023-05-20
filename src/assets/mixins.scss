@@ -1,3 +1,4 @@
+@import "colors";
 @mixin button {
 	border-radius: 2px;
 	padding: 16px 32px;
@@ -17,4 +18,12 @@
 	font-weight: 700;
 	font-size: 56px;
 	line-height: 80px;
+}
+
+@mixin title {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	color: $secondary;
+	margin-bottom: 8px;
 }

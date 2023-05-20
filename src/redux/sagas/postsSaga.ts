@@ -1,11 +1,13 @@
-import { takeLatest, all, call, put } from "redux-saga/effects";
+import { takeLatest, all, call, put, takeLeading } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
 
 import {
+	addNewPost,
 	getAllPosts,
 	getSearchedPosts,
 	getSinglePost,
 	setAllPosts,
+	setAllPostsLoading,
 	setSearchedPosts,
 	setSinglePost,
 } from "../reducers/postSlice";
@@ -13,11 +15,13 @@ import API from "../api";
 import { AllPostsResponse } from "./@types";
 import { CardType } from "../../utils/@globalTypes";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { GetAllPostsPayload } from "../reducers/@types";
+import { AddPostPayload, GetAllPostsPayload, GetSearchPostsPayload } from "../reducers/@types";
+import callCheckingAuth from "./callCheckingAuth";
 
 // function* getAllPostsWorker() {
 function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
-	const { offset,search, ordering ,} = action.payload;
+	yield put(setAllPostsLoading(true));
+	const { offset, search, ordering } = action.payload;
 	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
 		API.getPosts,
 		offset,
@@ -30,6 +34,7 @@ function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
 	} else {
 		console.warn("Error getting all posts", problem);
 	}
+	yield put(setAllPostsLoading(false));
 }
 
 function* getSinglePostWorker(action: PayloadAction<string>) {
@@ -44,16 +49,36 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
 	}
 }
 
-function* getSearchedPostsWorker(action: PayloadAction<string>) {
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchPostsPayload>) {
+	const { searchValue, isOverwrite, offset } = action.payload;
 	const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
 		API.getPosts,
-		0,
-		action.payload
+		offset,
+		searchValue
 	);
 	if (ok && data) {
-		yield put(setSearchedPosts(data.results));
+		yield put(
+			setSearchedPosts({
+				cardList: data.results,
+				postsCount: data.count,
+				isOverwrite,
+			})
+		);
 	} else {
 		console.warn("Error getting all posts", problem);
+	}
+}
+
+function* addNewPostWorker(action: PayloadAction<AddPostPayload>) {
+	const { data, callback } = action.payload;
+	const { ok, problem }: ApiResponse<undefined> = yield callCheckingAuth(
+		API.addPost,
+		data
+	);
+	if (ok) {
+		callback();
+	} else {
+		console.warn("Error adding post", problem);
 	}
 }
 
@@ -61,6 +86,7 @@ export default function* postsSaga() {
 	yield all([
 		takeLatest(getAllPosts, getAllPostsWorker),
 		takeLatest(getSinglePost, getSinglePostWorker),
-		takeLatest(getSearchedPosts, getSearchedPostsWorker),
+		takeLeading(getSearchedPosts, getSearchedPostsWorker),
+		takeLatest(addNewPost, addNewPostWorker),
 	]);
 }

@@ -12,7 +12,13 @@ const SearchCardList: FC<SearchCardListProps> = ({ cardsList }) => {
 	return cardsList.length > 0 ? (
 		<div className={styles.container}>
 			{cardsList.map((item, index) => {
-				return <Card key={item.id} card={item} size={CardSize.Search} />;
+				return (
+					<Card
+						key={`searchItem_${item.id}_${index}`}
+						card={item}
+						size={CardSize.Search}
+					/>
+				);
 			})}
 		</div>
 	) : (

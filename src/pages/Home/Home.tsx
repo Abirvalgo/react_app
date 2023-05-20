@@ -12,6 +12,7 @@ import { ButtonType, TabsNames } from "src/utils/@globalTypes";
 import { PER_PAGE } from "src/utils/constants";
 import Button from "src/components/Button";
 import styles from "./Home.module.scss";
+import Loader from "src/components/Loader";
 
 enum Order {
 	Title = "title",
@@ -28,6 +29,8 @@ const Home = () => {
 	const myPostsList = useSelector(PostSelectors.getMyPosts);
 	const favouritesList = useSelector(PostSelectors.getSavedPosts);
 	const postsCount = useSelector(PostSelectors.getAllPostsCount);
+	const isLoading = useSelector(PostSelectors.getAllPostsLoading);
+
 	const pagesCount = Math.ceil(postsCount / PER_PAGE);
 
 	const dispatch = useDispatch();
@@ -100,30 +103,36 @@ const Home = () => {
 					})}
 				/>
 			</div>
-			<CardsList cardsList={getCurrentList()} />
-			<SelectedPostModal />
-			{activeTab !== TabsNames.Popular &&
-				activeTab !== TabsNames.Favourites && (
-					<ReactPaginate
-						pageCount={pagesCount}
-						onPageChange={onPageChange}
-						containerClassName={styles.pagesContainer}
-						pageClassName={styles.pageNumber}
-						breakClassName={styles.pageNumber}
-						breakLinkClassName={styles.linkPage}
-						activeLinkClassName={styles.linkPage}
-						pageLinkClassName={styles.linkPage}
-						activeClassName={styles.activePageNumber}
-						nextClassName={classNames(styles.arrowButton, {
-							[styles.blockedButton]: currentPage === pagesCount,
-						})}
-						previousClassName={classNames(styles.arrowButton, {
-							[styles.blockedButton]: currentPage === 1,
-						})}
-						previousLinkClassName={styles.linkPage}
-						nextLinkClassName={styles.linkPage}
-					/>
-				)}
+			{isLoading ? (
+				<Loader />
+			) : (
+				<>
+					<CardsList cardsList={getCurrentList()} />
+					<SelectedPostModal />
+					{activeTab !== TabsNames.Popular &&
+						activeTab !== TabsNames.Favourites && (
+							<ReactPaginate
+								pageCount={pagesCount}
+								onPageChange={onPageChange}
+								containerClassName={styles.pagesContainer}
+								pageClassName={styles.pageNumber}
+								breakClassName={styles.pageNumber}
+								breakLinkClassName={styles.linkPage}
+								activeLinkClassName={styles.linkPage}
+								pageLinkClassName={styles.linkPage}
+								activeClassName={styles.activePageNumber}
+								nextClassName={classNames(styles.arrowButton, {
+									[styles.blockedButton]: currentPage === pagesCount,
+								})}
+								previousClassName={classNames(styles.arrowButton, {
+									[styles.blockedButton]: currentPage === 1,
+								})}
+								previousLinkClassName={styles.linkPage}
+								nextLinkClassName={styles.linkPage}
+							/>
+						)}
+				</>
+			)}
 		</div>
 	);
 };

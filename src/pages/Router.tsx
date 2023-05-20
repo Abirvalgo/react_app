@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
 import { getMyPosts } from "src/redux/reducers/postSlice";
 import Search from "./Search";
+import AddPost from "./AddPost";
 
 // RoutesList в @globaltypes.ts
 
@@ -31,7 +32,7 @@ const Router = () => {
 	}, [isLoggedIn]);
 
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename={process.env.PUBLIC_URL}>
 			<Routes>
 				<Route path={RoutesList.Home} element={<PagesContainer />}>
 					<Route path={RoutesList.Home} element={<Home />} />
@@ -50,7 +51,7 @@ const Router = () => {
 					<Route
 						path={RoutesList.AddPost}
 						element={
-							isLoggedIn ? <Home /> : <Navigate to={RoutesList.SignIn} />
+							isLoggedIn ? <AddPost /> : <Navigate to={RoutesList.SignIn} />
 						}
 					/>
 					<Route path={RoutesList.Search} element={<Search />} />
