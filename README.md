@@ -1,3 +1,7 @@
+A news blog with such features as: authorization, registration and validation of fields, email confirmation, password reset, display of posts,
+adding posts, deleting posts, system of likes and dislikes, conditional rendering for unauthorized users, per page pagination, 
+loading pagination, theme change, drag-and-drop for images, search, ordering of posts and page with personal posts.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
